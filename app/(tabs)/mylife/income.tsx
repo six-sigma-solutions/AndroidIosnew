@@ -12,8 +12,8 @@ export default function Income() {
 
   // Bullet point sections for income page
   const incomeBullets1 = [
-    
-    'Inco me is more than just money earned.',
+
+    'Income is more than just money earned.',
     'It is the reward for effort, time and value created.',
     'Whether through wages, salaries, profits or investments, income provides the foundation for stability and growth.'
   ];
@@ -38,26 +38,26 @@ export default function Income() {
   const sections = [
     {
       image: require("../../../assets/income-11.jpg"),
-      text: "Income is more than just money earned, it is the reward for effort, time and value created. Whether through wages, salaries, profits or investments, income provides the foundation for stability and growth.",
+      //text: "Income is more than just money earned, it is the reward for effort, time and value created. Whether through wages, salaries, profits or investments, income provides the foundation for stability and growth.",
     },
     {
       image: require("../../../assets/income-12.jpg"),
-      text: "True income, however is not just financial. It is about the returns you gain from life itself, the knowledge you acquire, the relationships you nurture and the health you maintain.",
+      // text: "True income, however is not just financial. It is about the returns you gain from life itself, the knowledge you acquire, the relationships you nurture and the health you maintain.",
     },
     {
       image: require("../../../assets/incomeimg-33.jpg"),
-      text: "Secure your family's future. Build lasting wealth and assets. Create the freedom to travel, explore and experience life. Live with peace of mind and purpose.",
+      // text: "Secure your family's future. Build lasting wealth and assets. Create the freedom to travel, explore and experience life. Live with peace of mind and purpose.",
     },
     {
       image: require("../../../assets/income4.png"),
-      text: "Income powers growth, not greed. Energy creates opportunity. Wealth begins with wisdom. Freedom follows discipline. Balance builds true success.",
+      // text: "Income powers growth, not greed. Energy creates opportunity. Wealth begins with wisdom. Freedom follows discipline. Balance builds true success.",
     },
   ];
 
   return (
     <AutoScrollView style={styles.container} showsVerticalScrollIndicator={false}>
       {/* Header */}
-      <View style={[styles.header, { paddingVertical: getResponsivePadding(isTablet, isPhone) }] }>
+      <View style={[styles.header, { paddingVertical: getResponsivePadding(isTablet, isPhone) }]}>
         <Text style={[styles.headerText, { fontSize: getResponsiveFontSize(isTablet, 26) }]}>Income : The Fuel of Growth </Text>
       </View>
 
@@ -88,7 +88,7 @@ export default function Income() {
                   : styles.image,
                 {
                   height: getResponsiveImageSize(isTablet, isPhone, section.image === require("../../../assets/income-12.jpg") ? 400 : 600),
-                  width: 140,
+                  width: "95%",
                   borderRadius: 70,
                   marginBottom: 18,
                   marginTop: 0,
@@ -101,8 +101,16 @@ export default function Income() {
             <View style={{ width: '100%', marginTop: 0, marginBottom: 0, paddingHorizontal: 18 }}>
               {bullets.map((bullet, i) => (
                 <View key={i} style={{ flexDirection: 'row', alignItems: 'flex-start', marginBottom: 18 }}>
-                  <Text style={{ color: '#FFD600', fontSize: 18, marginRight: 10, marginTop: 2 }}>●</Text>
-                  <Text style={{ color: '#fff', fontSize: 18, fontWeight: 'bold', flex: 1, lineHeight: 26 }}>{bullet}</Text>
+                  <Text style={{
+                    color: '#ffe600',
+                    fontSize: 20,
+                    fontWeight: 'bold',
+                    marginRight: 10,
+                    marginTop: 2,
+                    width: 24,
+                    textAlign: 'center',
+                  }}>●</Text>
+                  <Text style={{ color: '#fff', flex: 1, textAlign: 'left', fontWeight: 'bold', fontSize: 20, lineHeight: 32 }}>{bullet}</Text>
                 </View>
               ))}
             </View>
@@ -123,7 +131,7 @@ export default function Income() {
       {/* Footer */}
       <View style={styles.footer}>
         <Image
-          source={{  uri: "https://res.cloudinary.com/dgay8ba3o/image/upload/v1762702091/dailymoney222_guqvud.png" }}
+          source={{ uri: "https://res.cloudinary.com/dgay8ba3o/image/upload/v1762702091/dailymoney222_guqvud.png" }}
           style={styles.footerLogo}
         />
         <Text style={[styles.footerSubtitle, { fontSize: getResponsiveFontSize(isTablet, 16) }]}>Independent for Entire Life</Text>
@@ -134,21 +142,24 @@ export default function Income() {
 
 const styles = StyleSheet.create({
   income12Image: {
-    width: '100%',
-    height: 340,
-    borderRadius: 0,
-    resizeMode: 'cover',
-    marginBottom: 0,
-    backgroundColor: '#fff',
-    alignSelf: 'stretch',
-    borderTopLeftRadius: 100,
-    borderBottomRightRadius: 130,
+    width: 320,
+    height: 320,
+    overflow: "hidden",
+    marginBottom: 15,
+    borderTopLeftRadius: 120,
     borderTopRightRadius: 0,
     borderBottomLeftRadius: 0,
+    borderBottomRightRadius: 150,
+    backgroundColor: "#fff",
+    alignSelf: "center",
+    elevation: 6,
+    shadowColor: "#000",
+    shadowOpacity: 0.12,
+    shadowRadius: 12,
+    shadowOffset: { width: 0, height: 4 },
   },
   lastSectionCard: {
-    backgroundColor: '#f5f5f5',
-    borderTopLeftRadius: 140,
+    backgroundColor: '#008278',
     borderRadius: 20,
     marginHorizontal: 16,
     marginVertical: 12,
@@ -160,23 +171,28 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   lastImage: {
-    borderTopLeftRadius: 130,
-    borderBottomRightRadius: 150,
+    width: 320,
+    height: 320,
+    overflow: "hidden",
+    marginBottom: 15,
+    borderTopLeftRadius: 120,
     borderTopRightRadius: 0,
     borderBottomLeftRadius: 0,
-    width: '100%',
-    height: 480,
-    alignSelf: 'stretch',
-    marginTop: 0,
-    marginBottom: 0,
-    backgroundColor: '#fff',
+    borderBottomRightRadius: 150,
+    backgroundColor: "#fff",
+    alignSelf: "center",
+    elevation: 6,
+    shadowColor: "#000",
+    shadowOpacity: 0.12,
+    shadowRadius: 12,
+    shadowOffset: { width: 0, height: 4 },
+
   },
   container: { flex: 1, backgroundColor: "#fafafa" },
   header: { backgroundColor: "#047871", paddingVertical: 20, alignItems: "center", },
-  headerText: { color: "#fff", fontSize: 26, fontWeight: "700", textAlign: "center" , padding:10},
+  headerText: { color: "#fff", fontSize: 26, fontWeight: "700", textAlign: "center", padding: 10 },
   sectionCard: {
     backgroundColor: "#fff",
-    borderTopLeftRadius: 140,
     borderRadius: 20,
     marginHorizontal: 16,
     marginVertical: 12,
@@ -188,16 +204,21 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   image: {
-    width: '100%',
-    height: 480,
-    borderTopLeftRadius: 140,
-    borderBottomRightRadius: 140,
+    width: 32,
+    height: 10,
+    overflow: "hidden",
+    marginBottom: 15,
+    borderTopLeftRadius: 120,
     borderTopRightRadius: 0,
     borderBottomLeftRadius: 0,
-    resizeMode: 'cover',
-    marginBottom: 0,
-    backgroundColor: '#fff',
-    alignSelf: 'stretch',
+    borderBottomRightRadius: 150,
+    backgroundColor: "#fff",
+    alignSelf: "center",
+    elevation: 6,
+    shadowColor: "#000",
+    shadowOpacity: 0.12,
+    shadowRadius: 12,
+    shadowOffset: { width: 0, height: 4 },
   },
   incomeBulletDot: {
     color: '#21807a',
@@ -218,7 +239,7 @@ const styles = StyleSheet.create({
     fontFamily: 'System',
   },
   textBox: { padding: 16 },
-  text: { fontSize: 17, lineHeight: 25, textAlign: "justify",fontWeight: "700", color: "#333" },
+  text: { fontSize: 17, lineHeight: 25, textAlign: "justify", fontWeight: "700", color: "#333" },
   viewMoreWrap: { alignItems: "center", marginVertical: 30 },
   viewMoreBtn: {
     backgroundColor: "#0b3a55",
@@ -231,7 +252,7 @@ const styles = StyleSheet.create({
     elevation: 4,
   },
   viewMoreText: { color: "#fff", fontSize: 16, fontWeight: "600" },
-  footer: { alignItems: "center", paddingVertical: 30 ,backgroundColor:'#1f2937'},
+  footer: { alignItems: "center", paddingVertical: 30, backgroundColor: '#1f2937' },
   footerLogo: {
     width: 100,
     height: 60,

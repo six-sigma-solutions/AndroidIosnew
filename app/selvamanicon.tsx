@@ -30,6 +30,7 @@ export default function Contact() {
   const [status, setStatus] = useState<null | { state: string; message?: string }>(null);
   const [currentField, setCurrentField] = useState<string>("");
 
+  
   const countryCodes = [
     { code: "+93", country: "Afghanistan" },
     { code: "+355", country: "Albania" },
@@ -133,6 +134,8 @@ export default function Contact() {
     { code: "+251", country: "Ethiopia" }
   ];
 
+
+
   const handleChange = (key: string, value: string) => {
     setForm((prev) => ({ ...prev, [key]: value }));
   };
@@ -166,6 +169,7 @@ export default function Contact() {
       });
   };
 
+ 
   return (
     <KeyboardAwareScrollView
       style={{ flex: 1, backgroundColor: "#fafafa" }}
@@ -183,8 +187,27 @@ export default function Contact() {
         </TouchableOpacity>
       </View>
 
-      <Text style={styles.title}>📞 Contact Us</Text>
-      <Text style={styles.subtitle}>Join Together! Journey Together!</Text>
+      {/* --- TOP SECTION: Text Left & Image Right --- */}
+      <View style={styles.topSection}>
+        <View style={styles.contactText}>
+        <Text style={styles.title}>📞 Contact Us</Text>
+        <Text style={styles.subtitle}>Join Together! Journey Together!</Text>
+        
+        </View>
+
+        <View style={styles.contactImageContainer}>
+          <Image
+            source={require("../assets/person23.jpg")} // Your new image here, make sure it exists
+            style={styles.contactImage}
+            resizeMode="contain"
+          />
+          <Text style={styles.sloganText}>Traveling with{"\n"}R.K.Selvamani</Text>
+        </View>
+      </View>
+
+     
+
+ 
       
       {currentField && (
         <View style={styles.currentFieldIndicator}>
@@ -194,38 +217,38 @@ export default function Contact() {
         </View>
       )}
 
-      {/* --- Office Info --- */}
-      <View style={styles.officeInfo}>
-        <Text style={styles.heading1}> SIX SIGMA SOLUTION</Text>
-        <Text style={styles.heading}>🏢 Our Offices</Text>
-        <Text style={styles.text1}>
-           India {"\n"}
-            {/* No 13, Breeze Enclave, Noombal Main Road, <br /> */}
-            Chennai, TN-600077. 
-        </Text>
-         <Text style={styles.text}>
-       Launching soon !!!
-
+           {/* --- Office Info --- */}
+           <View style={styles.officeInfo}>
+             <Text style={styles.heading1}> SIX SIGMA SOLUTION</Text>
+             <Text style={styles.heading}>🏢 Our Offices</Text>
+             <Text style={styles.text1}>
+                India {"\n"}
+                 {/* No 13, Breeze Enclave, Noombal Main Road, <br /> */}
+                 Chennai, TN-600077. 
+             </Text>
+              <Text style={styles.text}>
+            Launching soon !!!
      
           
-        </Text>
-      <View >
-      <Image
-        source={require('../assets/phonestand.png')}
-        style={styles.phonestandImage}
-      />
-    </View>
+               
+             </Text>
+           <View >
+           <Image
+             source={require('../assets/phonestand.png')}
+             style={styles.phonestandImage}
+           />
+         </View>
+            
        
-  
-
-
-        <Text style={styles.text}>
-        Singapore, Malayasia, Australia, Dubai, London, France, Canada & USA.
-        </Text>
-        
-        <Text style={styles.text}>
-        Get in touch.
-        </Text>
+     
+     
+             <Text style={styles.text}>
+             Singapore, Malayasia, Australia, Dubai, London, France, Canada & USA.
+             </Text>
+             
+             <Text style={styles.text}>
+             Get in touch.
+             </Text>
 
         <Text style={[styles.heading, { marginTop: 20 }]}>✉️ Email us</Text>
         <Text style={styles.link} onPress={() => Linking.openURL("mailto:support@dmhealthy.com")}>
@@ -351,18 +374,18 @@ export default function Contact() {
         )}
       </View>
 
-        {/* Footer (unchanged content) */}
-            <View style={styles.footer}>
-              <Image
-                source={{
-                  uri: "https://res.cloudinary.com/dgay8ba3o/image/upload/v1762702091/dailymoney222_guqvud.png",
-                }}
-                style={styles.footerLogo}
-              />
-              <Text style={styles.footerTitle}></Text>
-              <Text style={styles.footerSubtitle}>Independent for Entire Life</Text>
-            </View>
-
+      
+              {/* Footer (unchanged content) */}
+                  <View style={styles.footer}>
+                    <Image
+                      source={{
+                        uri: "https://res.cloudinary.com/dgay8ba3o/image/upload/v1762702091/dailymoney222_guqvud.png",
+                      }}
+                      style={styles.footerLogo}
+                    />
+                    <Text style={styles.footerTitle}></Text>
+                    <Text style={styles.footerSubtitle}>Independent for Entire Life</Text>
+                  </View>
       
     </KeyboardAwareScrollView>
   );
@@ -371,7 +394,7 @@ export default function Contact() {
 const styles = StyleSheet.create({
   container: {
     padding: 20,
-    backgroundColor: "#fafafa", 
+    backgroundColor: "#fafafa",
     marginTop: 40,
     flexGrow: 1,
     paddingBottom: 30,
@@ -385,15 +408,75 @@ const styles = StyleSheet.create({
   closeButton: {
     padding: 6,
   },
+  topSection: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginBottom: 25,
+    paddingHorizontal: 10,
+  },
+  contactText: {
+    flex: 1,
+    paddingRight: 15,
+  },
+  contactSmallTitle: {
+    fontSize: 18,
+    color: "#0a66c2",
+    fontWeight: "700",
+    marginBottom: 5,
+  },
+  contactMainTitle: {
+    fontSize: 28,
+    fontWeight: "700",
+    color: "#222",
+    lineHeight: 36,
+  },
+  contactImageContainer: {
+    flex: 1,
+    alignItems: "center",
+  },
+  contactImage: {
+    width: 120,
+    height: 120,
+    borderRadius: 60,
+    marginBottom: 8,
+  },
+  sloganText: {
+    fontSize: 20,
+    fontWeight: "600",
+    color: "#002080",
+    textAlign: "center",
+  },
+  personContainer: {
+    alignItems: 'center',
+    marginBottom: 25,
+  },
+  personImage: {
+    width: 120,
+    height: 120,
+    borderRadius: 60,
+    marginBottom: 10,
+  },
+  personName: {
+    fontSize: 22,
+    fontWeight: '700',
+    color: '#0a66c2',
+  },
+  personSlogan: {
+    fontSize: 16,
+    fontStyle: 'italic',
+    color: '#444',
+    textAlign: 'center',
+  },
   title: {
-    fontSize: 30,
+    fontSize: 25,
     fontWeight: "700",
     textAlign: "center",
     marginVertical: 10,
     color: "#0a66c2",
   },
   subtitle: {
-    fontSize: 16,
+    fontSize: 20,
     textAlign: "center",
     marginBottom: 25,
     color: "#666",
@@ -423,8 +506,7 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 2 },
     shadowRadius: 5,
     elevation: 3,
-  },
-  heading: {
+  },heading: {
     fontSize: 18,
     fontWeight: "700",
     marginBottom: 8,
@@ -466,6 +548,7 @@ const styles = StyleSheet.create({
     marginBottom: 8,
     fontWeight: "bold",
   },
+
   link: {
     color: "#0a66c2",
     fontSize: 16,
@@ -541,7 +624,8 @@ const styles = StyleSheet.create({
     marginTop: 15,
     fontSize: 15,
   },
-   footer: { alignItems: "center", paddingVertical: 30, backgroundColor: "#1f2937" },
+
+     footer: { alignItems: "center", paddingVertical: 30, backgroundColor: "#1f2937" },
   footerLogo: {
     width: 100,
     height: 60,

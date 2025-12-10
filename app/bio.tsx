@@ -1,4 +1,4 @@
-// Bio.tsx (or Bio.jsx)
+// Bio.tsx
 import React, { useMemo, useRef, useEffect } from 'react';
 import {
   View,
@@ -6,21 +6,22 @@ import {
   Image,
   StyleSheet,
   Pressable,
-  Linking,
   Dimensions,
   Animated,
   Platform,
 } from 'react-native';
+
 import AutoScrollView from '../components/AutoScrollView';
 import Navbar from '../components/Navbar';
-
 import { useRouter } from 'expo-router';
 
 const NAVY = '#000080';
 
+// ---------------------- DATA ----------------------
+
 type Member = {
   name: string;
-  image: any;         // require(...) for local or { uri: string } for remote
+  image: any;
   slogan: string;
   link: string;
 };
@@ -28,87 +29,28 @@ type Member = {
 const founder = {
   name: 'Dr.V.Chellapondy',
   image: require("../assets/sir.png"),
-  link: '/contact',
+  link: '/cpcontact',
   slogan: "My job is - changing people's life.",
 };
 
 const members: Member[] = [
-  {
-    name: 'S.Vasu',
-    image: require("../assets/vasu.jpg"),
-    slogan: 'My Health is My Wealth.',
-    link: '/contact',
-  },
-  {
-    name: 'R.K.Selvamani',
-    image: require("../assets/person23.jpg"),
-    slogan: 'My World - My Children.',
-    link: '/contact',
-  },
-  {
-    name: 'C.Arvind',
-    image: require("../assets/aravind.jpg"),
-    slogan: 'I want to became Entrepreneur.',
-    link: '/contact',
-  },
-  {
-    name: 'Dr.K.P.Kosygan',
-    image: require("../assets/kosy.jpg"),
-    slogan: "I'm Forever a Student.",
-    link: '/contact',
-  },
-    {
-    name: 'Jeganraj A',
-    image: require("../assets/jega2.png"),
-    slogan: 'Healthy living happy living.',
-    link: '/contact',
-  },
-  {
-    name: 'Dhanush A V',
-    image: require("../assets/dhanush.jpg"),
-    slogan: 'My Healthy weight loss journey starts Now.',
-    link: '/contact',
-  },
-  {
-    name: 'Kishore K',
-    image: require("../assets/kisore.jpg"),
-    slogan: 'Slim, Fit, and full of Energy.',
-    link: '/contact',
-  },
-  {
-    name: 'Ilayaraju C',
-    image: require("../assets/raju.jpg"),
-    slogan: 'Small steps lead to big changes.',
-    link: '/contact',
-  },
- 
-  // Examples with placeholders via remote URLs:
-  {
-    name: 'X X X X',
-    image: { uri: 'https://placehold.co/100x100/EFEFEFF/grey?text=Member' },
-    slogan: 'My wellness journey begins Now.',
-    link: '/contact',
-  },
-  {
-    name: 'X X X X',
-    image: { uri: 'https://placehold.co/100x100/EFEFEFF/grey?text=Member' },
-    slogan: 'My wellness journey begins Now.',
-    link: '/contact',
-  },
-  {
-    name: 'X X X X',
-    image: { uri: 'https://placehold.co/100x100/EFEFEFF/grey?text=Member' },
-    slogan: 'My wellness journey begins Now.',
-    link: '/contact',
-  },
-  {
-    name: 'X X X X',
-    image: { uri: 'https://placehold.co/100x100/EFEFEFF/grey?text=Member' },
-    slogan: 'My wellness journey begins Now.',
-    link: '/contact',
-  },
-  // ...add the rest of your “X X X X” entries similarly
+  { name: 'S.Vasu', image: require("../assets/vasu.jpg"), slogan: 'My Health is My Wealth.', link: '/vasucontact' },
+  { name: 'R.K.Selvamani', image: require("../assets/person23.jpg"), slogan: 'My World - My Children.', link: '/selvamanicon' },
+  { name: 'C.Arvind', image: require("../assets/aravind.jpg"), slogan: 'I want to became Entrepreneur.', link: '/arvind' },
+  { name: 'Dr.K.P.Kosygan', image: require("../assets/kosy.jpg"), slogan: "I'm Forever a Student.", link: '/kosygan' },
+  { name: 'Jeganraj A', image: require("../assets/jega2.png"), slogan: 'Healthy living happy living.', link: '/jegan' },
+  { name: 'Dhanush A V', image: require("../assets/dhanush.jpg"), slogan: 'My Healthy weight loss journey starts Now.', link: '/dhanush' },
+  { name: 'Kishore K', image: require("../assets/kisore.jpg"), slogan: 'Slim, Fit, and full of Energy.', link: '/kirhore' },
+  { name: 'Ilayaraju C', image: require("../assets/raju.jpg"), slogan: 'Small steps lead to big changes.', link: '/ilaya' },
+
+  // Placeholder members
+  { name: 'X X X X', image: { uri: 'https://placehold.co/100x100/EEE/888?text=Member' }, slogan: 'My wellness journey begins Now.', link: '/contact' },
+  { name: 'X X X X', image: { uri: 'https://placehold.co/100x100/EEE/888?text=Member' }, slogan: 'My wellness journey begins Now.', link: '/contact' },
+  { name: 'X X X X', image: { uri: 'https://placehold.co/100x100/EEE/888?text=Member' }, slogan: 'My wellness journey begins Now.', link: '/contact' },
+  { name: 'X X X X', image: { uri: 'https://placehold.co/100x100/EEE/888?text=Member' }, slogan: 'My wellness journey begins Now.', link: '/contact' },
 ];
+
+// ---------------------- ICON ----------------------
 
 function PointingIcon() {
   const translateY = useRef(new Animated.Value(0)).current;
@@ -129,45 +71,43 @@ function PointingIcon() {
     );
     loop.start();
     return () => loop.stop();
-  }, [translateY, opacity]);
+  }, []);
 
   return (
     <Animated.Text
       style={[styles.pointingIcon, { transform: [{ translateY }], opacity }]}
-      accessible={false}
     >
       👆
     </Animated.Text>
   );
 }
 
+// ---------------------- TEAM CARD ----------------------
+
 function TeamCard({ member }: { member: Member }) {
   const scale = useRef(new Animated.Value(1)).current;
   const router = useRouter();
 
   const onPressIn = () => {
-    Animated.spring(scale, { toValue: 1.03, useNativeDriver: true, friction: 6, tension: 90 }).start();
+    Animated.spring(scale, { toValue: 1.03, useNativeDriver: true }).start();
   };
   const onPressOut = () => {
-    Animated.spring(scale, { toValue: 1, useNativeDriver: true, friction: 6, tension: 90 }).start();
+    Animated.spring(scale, { toValue: 1, useNativeDriver: true }).start();
   };
-
-  const open = () => router.push('/contact');
 
   return (
     <Animated.View style={[styles.card, { transform: [{ scale }] }]}>
       <View style={styles.profileRow}>
-        <Image source={member.image} style={styles.avatar} resizeMode="cover" />
+        <Image source={member.image} style={styles.avatar} />
         <Text style={styles.memberName}>{member.name}</Text>
       </View>
 
-      {/* Clickable slogan area at the bottom */}
       <Pressable
-        onPress={open}
+        onPress={() => router.push(member.link)}
         onPressIn={onPressIn}
         onPressOut={onPressOut}
         style={styles.linkArea}
-        android_ripple={{ color: 'rgba(255,255,255,0.15)' }}
+        android_ripple={{ color: "rgba(255,255,255,0.15)" }}
       >
         <Text style={styles.sloganText}>{member.slogan}</Text>
         <PointingIcon />
@@ -176,6 +116,8 @@ function TeamCard({ member }: { member: Member }) {
   );
 }
 
+// ---------------------- MAIN COMPONENT ----------------------
+
 export default function Bio() {
   const { width } = Dimensions.get('window');
   const isTablet = width <= 992 && width > 768;
@@ -183,24 +125,26 @@ export default function Bio() {
   const isTiny = width <= 480;
 
   const containerPad = useMemo(() => (isTiny ? 10 : 20), [isTiny]);
+
   const router = useRouter();
-  const openFounder = () => router.push('/contact');
+  const openFounder = () => router.push('/cpcontact');
 
   return (
     <View style={styles.safe}>
       <View style={styles.navbarContainer}>
         <Navbar />
       </View>
+
       <AutoScrollView
         contentContainerStyle={[styles.page, { padding: containerPad, paddingTop: 0 }]}
         showsVerticalScrollIndicator={false}
       >
-        {/* Header */}
+        {/* HEADER */}
         <View style={styles.headerWrap}>
           <Text
             style={[
               styles.headerText,
-              isMobile && { fontSize:15,marginHorizontal:9, paddingVertical: 25,justifyContent:'center' },
+              isMobile && { fontSize: 15, marginHorizontal: 9, paddingVertical: 25 },
               isTablet && { marginHorizontal: 40 },
             ]}
           >
@@ -208,15 +152,15 @@ export default function Bio() {
           </Text>
         </View>
 
-        {/* Founder */}
+        {/* FOUNDER SECTION */}
         <View style={styles.founderSection}>
           <View
             style={[
               styles.founderProfile,
-              isMobile && { flexDirection: 'column', gap: 10 },
+              isMobile && { flexDirection: "column", gap: 10 },
             ]}
           >
-            <Image source={founder.image} style={styles.founderAvatar} resizeMode="cover" />
+            <Image source={founder.image} style={styles.founderAvatar} />
             <Text style={[styles.founderName, isMobile && { fontSize: 28 }]}>
               {founder.name}
             </Text>
@@ -224,7 +168,7 @@ export default function Bio() {
 
           <View style={styles.hr} />
 
-          <Pressable onPress={openFounder} style={styles.founderLink} android_ripple={{ color: 'rgba(255,255,255,0.2)' }}>
+          <Pressable onPress={openFounder} style={styles.founderLink}>
             <Text style={[styles.founderSlogan, isMobile && { fontSize: 18 }]}>
               {founder.slogan}
             </Text>
@@ -232,26 +176,27 @@ export default function Bio() {
           </Pressable>
         </View>
 
-        {/* Team Grid */}
+        {/* TEAM GRID */}
         <View
           style={[
             styles.teamWrap,
             isTablet && { gap: 25 },
             isMobile && { gap: 20 },
           ]}
-        >   
+        >
           {members.map((m, idx) => (
             <TeamCard member={m} key={`${m.name}-${idx}`} />
           ))}
         </View>
 
-        {/* Footer Card */}
+        {/* FOOTER */}
         <View style={styles.footerCard}>
           <View style={styles.footerLogoWrap}>
             <Image
-              source={{ uri: "https://res.cloudinary.com/dgay8ba3o/image/upload/v1762702091/dailymoney222_guqvud.png", }}
+              source={{
+                uri: "https://res.cloudinary.com/dgay8ba3o/image/upload/v1762702091/dailymoney222_guqvud.png",
+              }}
               style={styles.footerLogo}
-              resizeMode="contain"
             />
           </View>
           <Text style={styles.footerTitle}></Text>
@@ -262,146 +207,175 @@ export default function Bio() {
   );
 }
 
-const cardShadow = Platform.select({
-  ios: {
-    shadowColor: '#000',
-    shadowOpacity: 0.15,
-    shadowOffset: { width: 0, height: 8 },
-    shadowRadius: 12,
-  },
-  android: { elevation: 6 },
-});
+// ---------------------- SHADOW FIX ----------------------
+
+const cardShadow =
+  Platform.OS === "ios"
+    ? {
+        shadowColor: "#000",
+        shadowOpacity: 0.15,
+        shadowOffset: { width: 0, height: 8 },
+        shadowRadius: 12,
+      }
+    : {
+        elevation: 6,
+      };
+
+// ---------------------- STYLES ----------------------
 
 const styles = StyleSheet.create({
-  safe: { flex: 1, },
-  navbarContainer: { 
-    marginTop: 0,
-    paddingTop: 0,
-  },
+  safe: { flex: 1 },
+  navbarContainer: { marginTop: 0, paddingTop: 0 },
+
   page: { gap: 16 },
-  headerWrap: { alignItems: 'center', marginTop: 10, marginBottom: 20 },
+
+  headerWrap: { alignItems: "center", marginTop: 10, marginBottom: 20 },
+
   headerText: {
-    color: 'rgb(1,255,1)',
+    color: "rgb(1,255,1)",
     fontSize: 24,
-    textAlign: 'center',
-    backgroundColor: '#040464',
+    textAlign: "center",
+    backgroundColor: "#040464",
     borderRadius: 5,
     marginHorizontal: 190,
     marginBottom: 20,
     paddingVertical: 12,
     paddingHorizontal: 10,
-    fontWeight: '600',
+    fontWeight: "600",
   },
 
-  founderSection: { alignItems: 'center', marginBottom: 30 },
+  founderSection: { alignItems: "center", marginBottom: 30 },
+
   founderProfile: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
     gap: 20,
-    flexWrap: 'wrap',
-    justifyContent: 'center',
+    flexWrap: "wrap",
+    justifyContent: "center",
   },
+
   founderAvatar: {
-    width: 150, height: 150, borderRadius: 75,
-    borderWidth: 4, borderColor: '#fff',
+    width: 150,
+    height: 150,
+    borderRadius: 75,
+    borderWidth: 4,
+    borderColor: "#fff",
     ...cardShadow,
   },
-  founderName: { fontSize: 32, color: '#333', fontWeight: '700' },
+
+  founderName: {
+    fontSize: 32,
+    color: "#333",
+    fontWeight: "700",
+  },
+
   hr: {
-    width: '60%',
+    width: "60%",
     height: 1,
-    backgroundColor: '#ccc',
+    backgroundColor: "#ccc",
     marginVertical: 20,
   },
-  founderLink: { position: 'relative', paddingBottom: 35, alignItems: 'center' },
+
+  founderLink: { position: "relative", paddingBottom: 35, alignItems: "center" },
+
   founderSlogan: {
     fontSize: 20,
-    fontStyle: 'italic',
-    color: '#fff',
+    fontStyle: "italic",
+    color: "#fff",
     backgroundColor: NAVY,
-    fontWeight: 'bold',
+    fontWeight: "bold",
     paddingVertical: 10,
     paddingHorizontal: 14,
     borderRadius: 5,
-    textAlign: 'center',
+    textAlign: "center",
   },
 
   teamWrap: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    flexWrap: 'wrap',
+    flexDirection: "row",
+    justifyContent: "center",
+    flexWrap: "wrap",
     gap: 40,
   },
+
   card: {
-    backgroundColor: '#fff',
+    backgroundColor: "#fff",
     paddingTop: 25,
     paddingHorizontal: 25,
-    paddingBottom: 70, // space for bottom link
+    paddingBottom: 70,
     borderRadius: 10,
     maxWidth: 420,
-    width: '90%',
-    position: 'relative',
+    width: "90%",
+    position: "relative",
     ...cardShadow,
   },
+
   profileRow: {
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'center',
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
     gap: 10,
     marginBottom: 15,
-    width: '100%',
   },
-  avatar: { width: 100, height: 100, borderRadius: 50, alignSelf: 'center' },
-  memberName: { fontSize: 24, color: '#333', fontWeight: '700', textAlign: 'center' },
+
+  avatar: { width: 100, height: 100, borderRadius: 50 },
+
+  memberName: {
+    fontSize: 24,
+    color: "#333",
+    fontWeight: "700",
+    textAlign: "center",
+  },
 
   linkArea: {
-    position: 'absolute',
+    position: "absolute",
     left: 20,
     right: 20,
     bottom: 25,
-    alignItems: 'center',
+    alignItems: "center",
   },
+
   sloganText: {
     fontSize: 16,
-    fontWeight: '700',
-    color: '#fff',
+    fontWeight: "700",
+    color: "#fff",
     backgroundColor: NAVY,
     paddingVertical: 8,
     paddingHorizontal: 12,
     borderRadius: 5,
-    textAlign: 'center',
-    fontStyle: 'italic',
+    textAlign: "center",
+    fontStyle: "italic",
   },
+
   pointingIcon: {
-    position: 'absolute',
+    position: "absolute",
     bottom: -9,
     fontSize: 22,
-    alignSelf: 'center',
+    alignSelf: "center",
   },
 
   footerCard: {
     marginTop: 24,
-    alignSelf: 'center',
-    alignItems: 'center',
-    backgroundColor: '#1f2937',
+    alignSelf: "center",
+    alignItems: "center",
+    backgroundColor: "#1f2937",
     marginBottom: 40,
     borderRadius: 12,
     paddingVertical: 24,
     paddingHorizontal: 16,
-    width: '92%',
+    width: "92%",
     ...cardShadow,
   },
+
   footerLogoWrap: { width: 120, height: 50, marginBottom: 8 },
- 
-  footer: { alignItems: "center", paddingVertical: 30 ,backgroundColor:'#1f2937'},
-  footerLogo: {
-    width: 100,
-    height: 60,
-    alignSelf:"center",
-    resizeMode: "contain",
-    paddingRight:10,
-    marginBottom: 10,
+
+  footerLogo: { width: 100, height: 60, resizeMode: "contain" },
+
+  footerTitle: { fontSize: 20, fontWeight: "700", color: "#fffb2c" },
+
+  footerSubtitle: {
+    fontSize: 16,
+    fontWeight: "700",
+    color: "#fffb2c",
   },
-  footerTitle: { fontSize: 20, fontWeight: "700", color: "#fffb2c", marginTop:-20 },
-  footerSubtitle: { fontSize: 16, fontWeight: "700", color: "#fffb2c" },
 });
+

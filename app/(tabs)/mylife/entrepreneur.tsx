@@ -119,7 +119,7 @@ const Entrepreneur = () => {
           textColor: "#ffffffff",
         },
       ].map((row, index) => (
-        <View key={index} style={[styles.row, { backgroundColor: row.bgColor }]}> 
+        <View key={index} style={[styles.row, { backgroundColor: row.bgColor }]}>
           <View style={styles.entpCardImageWrapper}>
             <Image
               source={row.image}
@@ -137,7 +137,7 @@ const Entrepreneur = () => {
         </View>
       ))}
 
-        {/* View More Button */}
+      {/* View More Button */}
       <TouchableOpacity
         style={styles.btnPrimary}
         onPress={() => router.push("/(tabs)/mylife/income")}
@@ -239,10 +239,10 @@ const styles = StyleSheet.create({
 
   bulletDot: {
     color: '#ffe600',
-    fontSize: 22,
+    fontSize: 20,
     fontWeight: 'bold',
     marginRight: 10,
-    marginTop: 6,
+    marginTop: 2,
     width: 24,
     textAlign: 'center',
   },
