@@ -1,5 +1,5 @@
 /* eslint-disable react/no-unescaped-entities */
-import React from "react";
+import React, { useRef, useState } from "react";
 import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
 import AutoScrollView from '../../components/AutoScrollView';
 import { useRouter } from "expo-router";
@@ -10,22 +10,30 @@ import { useResponsive } from '../../hooks/use-responsive';
 export default function Health() {
   const router = useRouter();
   const { isTablet, isPhone } = useResponsive();
+
+  // Ref and state for scrolling to footer
+
+  const [footerY, setFooterY] = useState(0);
+
+  // Use this if AutoScrollView wraps a ScrollView
+  const scrollRef = useRef<React.ElementRef<typeof AutoScrollView>>(null);
+  // OR use typeof AutoScrollView
+  const scrollRef2 = useRef<typeof AutoScrollView>(null);
+
   return (
-    <AutoScrollView style={styles.container}>
+    <AutoScrollView ref={scrollRef} style={styles.container}>
       {/* === PAGE TITLE === */}
-  <Text style={styles.heading}>{"Our Health".replace(/["']/g, "")}</Text>
+      <Text style={styles.heading}>{"Our Health".replace(/["']/g, "")}</Text>
 
       {/* === HERO SECTION === */}
       <View style={styles.hero}>
-        
-
         <View style={styles.heroContent}>
-           <View style={[styles.heroImageContainer, { height: getResponsiveImageSize(isTablet, isPhone, 420) }] }>
-          <Image
-            source={require("../../assets/healthhead.jpg")}
-            style={[styles.heroImage, { height: '100%' }]}
-          />
-        </View>
+          <View style={[styles.heroImageContainer, { height: getResponsiveImageSize(isTablet, isPhone, 420) }]}>
+            <Image
+              source={require("../../assets/healthhead.jpg")}
+              style={[styles.heroImage, { height: '100%' }]}
+            />
+          </View>
 
           <Text style={styles.heroTitle}>
             <Text style={styles.colorHealthy}>{"Live Healthy, ".replace(/["']/g, "")}</Text>
@@ -33,12 +41,21 @@ export default function Health() {
             <Text style={styles.colorWealthy}>{"Live Wealthy".replace(/["']/g, "")}</Text>
           </Text>
         </View>
-       
+
         <View style={styles.heroContent}>
           <Text style={styles.heroText}>
             {"Your journey to wellness and financial independence starts here. Our health is our true wealth it gives us energy, focus and freedom to live fully. Every choice what we eat, how we move, how we rest shapes our future. When we care for our health, we care for our dreams, our families and our world. Live Strong, Think clear and Feel happy. Together, we build a healthier tomorrow. Our health, our strength & our future.".replace(/["']/g, "")}
           </Text>
-          <TouchableOpacity style={styles.learnMoreBtn} onPress={() => {}} activeOpacity={0.8}>
+
+
+          {/* Learn More Button Scrolls to Footer */}
+          <TouchableOpacity
+            style={styles.learnMoreBtn}
+            onPress={() => {
+              scrollRef.current?.scrollTo({ y: footerY, animated: true });
+            }}
+            activeOpacity={0.8}
+          >
             <Text style={styles.learnMoreBtnText}>Learn More</Text>
           </TouchableOpacity>
         </View>
@@ -90,16 +107,16 @@ export default function Health() {
           },
         ].map((item, index) => (
           <View key={index} style={styles.cardBlock}>
-            <Image 
-              source={item.img} 
+            <Image
+              source={item.img}
               style={[
                 styles.cardImage,
-                { height: getResponsiveImageSize(isTablet, isPhone, index === 0 ? 600 : 600), width: '100%' }
+                { height: getResponsiveImageSize(isTablet, isPhone, 700), width: '100%' }
               ]}
             />
-            <View style={[styles.cardBox, { backgroundColor: item.color }]}> 
+            <View style={[styles.cardBox, { backgroundColor: item.color }]}>
               {item.quotes.map((q, i) => (
-                <Text key={i} style={[styles.cardText, { fontSize: getResponsiveFontSize(isTablet, 20) }] }>
+                <Text key={i} style={[styles.cardText, { fontSize: getResponsiveFontSize(isTablet, 20) }]}>
                   {q.replace(/["']/g, "")}
                 </Text>
               ))}
@@ -109,25 +126,28 @@ export default function Health() {
       </View>
 
       {/* === FOOTER QUOTES === */}
-           <View style={styles.footerCard}>
+      <View
+        style={styles.footerCard}
+        onLayout={(e) => setFooterY(e.nativeEvent.layout.y)}
+      >
         <View style={styles.footer}>
           <Text style={styles.footerQuoteEnglish}>
             {"No medicine is needed, if you allow proper digestion between meals.".replace(/["']/g, "")}
           </Text>
-          
+
           <Text style={styles.footerQuoteTamil}>
             {"  மருந்தென வேண்டாவாம் யாக்கைக்கு அருந்தியது".replace(/["']/g, "")}
           </Text>
           <Text style={styles.footerQuoteTamil}>
             {"  அற்றது போற்றி உணின்.".replace(/["']/g, "")}
           </Text>
-          
+
           <View style={styles.rightAlignContainer}>
             <Text style={styles.footerQuoteTamilsecondtitle}>{"- திருக்குறள்.".replace(/["']/g, "")}</Text>
           </View>
 
           <Text style={styles.footerQuoteTamilsecond3}>
-           {"முன் உண்டது செரித்ததைத் தெளிவாக அறிந்து, அதன் பின்னரே உண்பானால், அவனுடைய உடலுக்கு ‘மருந்து’ வேண்டாம்.".replace(/["']/g, "")}
+            {"முன் உண்டது செரித்ததைத் தெளிவாக அறிந்து, அதன் பின்னரே உண்பானால், அவனுடைய உடலுக்கு ‘மருந்து’ வேண்டாம்.".replace(/["']/g, "")}
           </Text>
 
           <Text style={styles.footerQuoteTamilsecond4}>
@@ -135,12 +155,12 @@ export default function Health() {
           </Text>
 
           <Text style={styles.footerQuotenew}>
-                💧"Eat water, Sip food" The secret of true healthy life.
+            💧"Eat water, Sip food" The secret of true healthy life.
           </Text>
         </View>
       </View>
 
-      {/* === LEARN MORE BUTTON === */}
+      {/* === LEARN MORE BUTTON TO WEALTH PAGE === */}
       <TouchableOpacity
         style={styles.btnPrimary}
         onPress={() => router.push("/(tabs)/wealth")}
@@ -166,6 +186,7 @@ export default function Health() {
   );
 }
 
+// === STYLES ===
 const styles = StyleSheet.create({
   learnMoreBtn: {
     backgroundColor: '#047871',
@@ -183,7 +204,6 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   container: { flex: 1, backgroundColor: "#fff", paddingVertical: 20 },
-
   heading: {
     fontSize: 36,
     fontWeight: "700",
@@ -198,22 +218,13 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     minWidth: 220,
   },
-
-  hero: {
-    flexDirection: "column",
-    alignItems: "center",
-    paddingHorizontal: 20,
-  },
-
-
+  hero: { flexDirection: "column", alignItems: "center", paddingHorizontal: 20 },
   heroImageContainer: {
     width: 320,
     height: 320,
     overflow: "hidden",
     marginBottom: 15,
     borderTopLeftRadius: 120,
-    borderTopRightRadius: 0,
-    borderBottomLeftRadius: 0,
     borderBottomRightRadius: 150,
     backgroundColor: "#fff",
     alignSelf: "center",
@@ -223,64 +234,22 @@ const styles = StyleSheet.create({
     shadowRadius: 12,
     shadowOffset: { width: 0, height: 4 },
   },
-
-  heroImage: {
-    width: "100%",
-    height: "100%",
-    resizeMode: "cover" as const,
-  },
-
-  heroContent: {
-    alignItems: "flex-start",
-    justifyContent: "flex-start",
-    paddingHorizontal: 15,
-  },
-
-  heroTitle: {
-    fontSize: 26,
-    fontWeight: "800",
-    lineHeight: 35,
-    marginBottom: 10,
-    textAlign: "center",
-  },
-
+  heroImage: { width: "100%", height: "100%", resizeMode: "cover" as const },
+  heroContent: { alignItems: "flex-start", justifyContent: "flex-start", paddingHorizontal: 15 },
+  heroTitle: { fontSize: 26, fontWeight: "800", lineHeight: 35, marginBottom: 10, textAlign: "center" },
   colorHealthy: { color: "#d32a2a" },
   colorHappy: { color: "#047871" },
   colorWealthy: { color: "#7a7272" },
-
-  heroText: {
-    fontSize: 17,
-    fontWeight: "600",
-    marginVertical: 15,
-    color: "#333",
-    textAlign: "left",
-    lineHeight: 25,
-  },
-
-  sectionHeader: {
-    textAlign: "center",
-    fontSize: 22,
-    fontWeight: "700",
-    marginVertical: 40,
-    color: "#c00606",
-  },
-
-  subImageContainer: { paddingHorizontal: 20, marginBottom: 20  },
-  cardBlock: {
-  marginBottom: 40,
-  borderRadius: 20,
-  overflow: "visible",
-  // Removed background and shadow for clean look
-},
-
+  heroText: { fontSize: 17, fontWeight: "600", marginVertical: 15, color: "#333", textAlign: "left", lineHeight: 25 },
+  sectionHeader: { textAlign: "center", fontSize: 22, fontWeight: "700", marginVertical: 40, color: "#c00606" },
+  subImageContainer: { paddingHorizontal: 20, marginBottom: 20 },
+  cardBlock: { marginBottom: 40, borderRadius: 20, overflow: "visible" },
   cardImage: {
     width: "100%",
     height: 500,
     marginBottom: 15,
     resizeMode: "cover" as const,
     borderTopLeftRadius: 140,
-    borderTopRightRadius: 0,
-    borderBottomLeftRadius: 0,
     borderBottomRightRadius: 140,
     overflow: "hidden",
     backgroundColor: "#fff",
@@ -289,122 +258,21 @@ const styles = StyleSheet.create({
     shadowRadius: 10,
     shadowOffset: { width: 0, height: 4 },
   },
-
-  cardBox: {
-    borderRadius: 12,
-    padding: 20,
-    justifyContent: "center",
-    alignItems: "center",
-    elevation: 4,
-  },
-
-  cardText: {
-    color: "black",
-    fontWeight: "600",
-    fontSize: 20,
-    textAlign: "center",
-    marginVertical: 5,
-    lineHeight: 25,
-    minHeight:60,
-  },
-
+  cardBox: { borderRadius: 12, padding: 20, justifyContent: "center", alignItems: "center", elevation: 4 },
+  cardText: { color: "black", fontWeight: "600", fontSize: 20, textAlign: "center", marginVertical: 5, lineHeight: 25, minHeight: 60 },
   footerCard: { paddingHorizontal: 20, marginTop: 40 },
-  footer: {
-    backgroundColor: "#817676",
-    borderRadius: 16,
-    paddingVertical: 25,
-    paddingHorizontal: 15,
-    alignItems: "flex-start",
-  },
-
-  footerQuoteEnglish: {
-  color: "#ffe600",
-    fontWeight: "700",
-    fontSize: 12,
-    marginBottom: 10,
-    textAlign: "left",
-    marginLeft:4
-  },
-
-
-   footerQuotenew: {
-  color: "#ffe600",
-    fontWeight: "600",
-    fontSize: 12,
-    marginBottom: 10,
-    textAlign: "left",
-    marginLeft:-6
-  },
-  footerQuoteTamil: {
-  color: "#1aff7a",
-    fontWeight: "700",
-    fontSize: 10,
-    textAlign: "left",
-  },
-
-  footerQuoteTamilsecond: {
-    color: "#fffb2c",
-    fontWeight: "700",
-    fontSize: 10,
-    textAlign: "left",
-  },
-
-  leftAlignContainer: {
-    width: "85%",
-    alignItems: "flex-start",
-  },
-
-  rightAlignContainer: {
-    width: "90%",
-    alignItems: "flex-end",
-  },
-
-  footerQuoteTamilsecondtitle: {
-  color: "#1aff7a",
-    fontWeight: "600",
-    fontSize: 10,
-    textAlign: "center",
-    marginVertical: 5,
-  },
-
-  footerQuoteTamilsecond3: {
-  color: "#fff",
-    fontWeight: "600",
-    fontSize: 10,
-    textAlign: "left",
-    paddingHorizontal: 10,
-    marginVertical: 5,
-    marginLeft:-6
-  },
-
-  footerQuoteTamilsecond4: {
-  color: "#1aff7a",
-    fontWeight: "600",
-    fontSize: 10,
-    textAlign: "left",
-    paddingHorizontal: 10,
-    marginVertical: 5,
-    marginLeft:-6
-  },
-
-  btnPrimary: {
-    backgroundColor: "#0b3a55",
-    paddingVertical: 14,
-    paddingHorizontal: 40,
-    borderRadius: 30,
-    marginVertical: 30,
-    alignSelf: "center",
-  },
-
+  footer: { backgroundColor: "#817676", borderRadius: 16, paddingVertical: 25, paddingHorizontal: 15, alignItems: "flex-start" },
+  footerQuoteEnglish: { color: "#ffe600", fontWeight: "700", fontSize: 12, marginBottom: 10, textAlign: "left", marginLeft: 4 },
+  footerQuotenew: { color: "#ffe600", fontWeight: "600", fontSize: 12, marginBottom: 10, textAlign: "left", marginLeft: -6 },
+  footerQuoteTamil: { color: "#1aff7a", fontWeight: "700", fontSize: 10, textAlign: "left" },
+  rightAlignContainer: { width: "90%", alignItems: "flex-end" },
+  footerQuoteTamilsecondtitle: { color: "#1aff7a", fontWeight: "600", fontSize: 10, textAlign: "center", marginVertical: 5 },
+  footerQuoteTamilsecond3: { color: "#fff", fontWeight: "600", fontSize: 10, textAlign: "left", paddingHorizontal: 10, marginVertical: 5, marginLeft: -6 },
+  footerQuoteTamilsecond4: { color: "#1aff7a", fontWeight: "600", fontSize: 10, textAlign: "left", paddingHorizontal: 10, marginVertical: 5, marginLeft: -6 },
+  btnPrimary: { backgroundColor: "#0b3a55", paddingVertical: 14, paddingHorizontal: 40, borderRadius: 30, marginVertical: 30, alignSelf: "center" },
   btnText: { color: "#fff", fontWeight: "700", fontSize: 16 },
-
-  footer2: { alignItems: "center", paddingVertical: 30,backgroundColor:'#1f2937' },
-  footerLogo2: {
-    width: 100,
-    height: 60,
-    resizeMode: "contain" as const,
-    marginBottom: 10,
-  },
-  footerTitle2: { fontSize: 20,marginTop:-15, fontWeight: "700", color: "#fffb2c" },
+  footer2: { alignItems: "center", paddingVertical: 30, backgroundColor: '#1f2937' },
+  footerLogo2: { width: 100, height: 60, resizeMode: "contain" as const, marginBottom: 10 },
+  footerTitle2: { fontSize: 20, marginTop: -15, fontWeight: "700", color: "#fffb2c" },
   footerSubtitle2: { fontSize: 16, fontWeight: "700", color: "#fffb2c" },
 });

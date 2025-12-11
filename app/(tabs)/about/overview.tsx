@@ -117,7 +117,7 @@ const styles = StyleSheet.create({
   headerText: { fontSize: 46, fontWeight: "700", textAlign: "center", color: "#fff" },
 
   card: {
-    backgroundColor: "#fff",
+    backgroundColor: "#047871",
     borderRadius: 19,
     marginHorizontal: 14,
     marginVertical: 12,
@@ -131,7 +131,7 @@ const styles = StyleSheet.create({
   },
 
   title: { fontSize: 20, fontWeight: "700", marginBottom: 10, textAlign: "center" },
-  text: { fontSize: 17, lineHeight: 25, textAlign: "justify", color: "#0f172a", marginBottom: 15, fontWeight: "600" },
+  text: { fontSize: 17, lineHeight: 25, textAlign: "justify", color: "#fff", marginBottom: 15, fontWeight: "600" },
 
   image: {
     width: '100%',

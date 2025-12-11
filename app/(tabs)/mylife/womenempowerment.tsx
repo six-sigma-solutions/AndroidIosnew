@@ -133,7 +133,7 @@ const styles = StyleSheet.create({
     hero: { flexDirection: "column", alignItems: "center", marginVertical: 20 },
     heroImage: {
         width: "100%",
-        height: 500,
+        height: 650,
         borderRadius: 20,
         marginBottom: 15,
         backgroundColor: "#fff",
@@ -184,12 +184,12 @@ const styles = StyleSheet.create({
     statText: { fontSize: 14, color: "#fff", textAlign: "center" },
 
     programs: { flexDirection: "row", flexWrap: "wrap", justifyContent: "center", gap: 15 },
-    program: { width: 300, backgroundColor: "#fff", borderRadius: 10, padding: 10, margin: 10, shadowColor: "#000", shadowOpacity: 0.1, shadowRadius: 5, elevation: 3 },
+    program: { width: 400, backgroundColor: "#fff", borderRadius: 10, padding: 10, margin: 10, shadowColor: "#000", shadowOpacity: 0.1, shadowRadius: 5, elevation: 3 },
     programTitle: { fontSize: 28, fontWeight: "700", color: "#b20a2c", marginBottom: 5 },
     programText: { fontSize: 18, color: "#555", marginBottom: 10, fontWeight: "700", },
     programImage: {
-        width: 290,
-        height: 420,
+        width: "100%",
+        height: 600,
         borderRadius: 20,
         backgroundColor: "#fff",
         shadowColor: "#000",

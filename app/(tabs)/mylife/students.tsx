@@ -148,7 +148,7 @@ export default function Students() {
                     height: getResponsiveImageSize(
                       isTablet,
                       isPhone,
-                      index === 1 ? 670 : 570
+                      index === 1 ? 670 : 700
                     ),
                   },
                   index === 1 && styles.imageShort,

@@ -113,17 +113,40 @@ const Visionmission: React.FC = () => {
             },
           ]}
         >
-          <Text style={[styles.heroHeading, { fontSize: getResponsiveFontSize(isTablet, 20) }] }>
+          <Text style={[styles.heroHeading, { fontSize: getResponsiveFontSize(isTablet, 20) }]}>
             Improving the world&apos;s health, happiness and prosperity{"\n"}deliver
             with precision.
           </Text>
-          <Text style={[styles.heroParagraph, { fontSize: getResponsiveFontSize(isTablet, 14), lineHeight: getResponsiveFontSize(isTablet, 20) }] }>
-            A brighter world healthy in spirit, joyful in living and abundant
-            in growth.{"\n"}Living in flow with nature where wellness
-            nourishes wealth and joy sustains growth.{"\n"}Building a future
-            where vitality, happiness and financial independance flow as one.{"\n"}
-            To enrich every life with balance, energy and prosperity.
-          </Text>
+<View style={{ marginTop: 10 }}>
+  <View style={{ flexDirection: "row", alignItems: "flex-start", marginBottom: 10 }}>
+    <Text style={styles.tick}>●</Text>
+    <Text style={styles.pointTexthero}>
+      A brighter world healthy in spirit, joyful in living and abundant in growth.
+    </Text>
+  </View>
+
+  <View style={{ flexDirection: "row", alignItems: "flex-start", marginBottom: 10 }}>
+    <Text style={styles.tick}>●</Text>
+    <Text style={styles.pointTexthero}>
+      Living in flow with nature where wellness nourishes wealth and joy sustains growth.
+    </Text>
+  </View>
+
+  <View style={{ flexDirection: "row", alignItems: "flex-start", marginBottom: 10 }}>
+    <Text style={styles.tick}>●</Text>
+    <Text style={styles.pointTexthero}>
+      Building a future where vitality, happiness and financial independence flow as one.
+    </Text>
+  </View>
+
+  <View style={{ flexDirection: "row", alignItems: "flex-start" }}>
+    <Text style={styles.tick}>●</Text>
+    <Text style={styles.pointTexthero}>
+      To enrich every life with balance, energy and prosperity.
+    </Text>
+  </View>
+</View>
+
         </Animated.View>
       </View>
 
@@ -131,14 +154,30 @@ const Visionmission: React.FC = () => {
       {sections.map((section, index) => (
         <View key={index} style={styles.visionBlock}>
           {/* Image on Top */}
-          <Image source={section.img} style={[styles.sectionImage, { height: getResponsiveImageSize(isTablet, isPhone, 230) }]} />
+          <Image source={section.img} style={[styles.sectionImage, { height: getResponsiveImageSize(isTablet, isPhone, 220) }]} />
 
           {/* Text Below */}
           <View style={styles.visionText}>
             {section.points.map((point, i) => (
               <View key={i} style={styles.visionPoint}>
-                <Text style={[styles.tick, { fontSize: getResponsiveFontSize(isTablet, 14) }]}>✔ </Text>
-                <Text style={[styles.pointText, { fontSize: getResponsiveFontSize(isTablet, 17), lineHeight: getResponsiveFontSize(isTablet, 25) }]}>{point}</Text>
+                <Text style={[styles.tick, {
+                
+                  color: "black",
+                  fontSize: 20,
+                  fontWeight: "bold",
+                  marginRight: 15,
+                  marginTop: 2,
+                  width: 24,
+                  textAlign: "center",
+                }]}>●</Text>
+                <Text style={[styles.pointText, {
+
+                  flex: 1,
+                  fontWeight: "bold",
+                  fontSize: 20,
+                  textAlign: "left",
+                  lineHeight: 32,
+                }]}>{point}</Text>
               </View>
             ))}
           </View>
@@ -154,7 +193,7 @@ const Visionmission: React.FC = () => {
         >
           {galleryImages.map((img, idx) => (
             <View key={idx} style={styles.galleryItem}>
-              <Image source={img} style={[styles.galleryImage, { height: getResponsiveImageSize(isTablet, isPhone, 470), width: getResponsiveImageSize(isTablet, isPhone, 320) }]} resizeMode="cover" />
+              <Image source={img} style={[styles.galleryImage, { height: getResponsiveImageSize(isTablet, isPhone, 480), width: getResponsiveImageSize(isTablet, isPhone, 320) }]} resizeMode="cover" />
               <Animated.Text
                 style={[
                   styles.arrow,
@@ -207,10 +246,10 @@ const styles = StyleSheet.create({
     fontWeight: "900",
     color: "#fff",
     marginVertical: 20,
-    backgroundColor:'#047871',
-    width:'93%',
-    alignSelf:'center',
-    borderRadius:8,
+    backgroundColor: '#047871',
+    width: '93%',
+    alignSelf: 'center',
+    borderRadius: 8,
   },
   heroCard: {
     position: "relative",
@@ -223,7 +262,7 @@ const styles = StyleSheet.create({
   },
   heroImage: {
     width: "100%",
-    opacity: 0.7,
+    
   },
   heroOverlay: {
     position: "absolute",
@@ -244,6 +283,28 @@ const styles = StyleSheet.create({
     color: "#ddd",
     fontWeight: "600",
   },
+  pointTexthero: {
+  flex: 1,
+    color: "#ddd",
+  fontWeight: "500",
+  fontSize: 15,
+    textAlign: "justify",
+},
+
+  tick: {
+  color: "#ddd",
+  fontWeight: "500",
+  marginRight: 5,
+  marginTop: 1,
+  width: 10,
+},
+
+pointText: {
+  flex: 1,
+  fontWeight: "bold",
+  textAlign: "left",
+},
+
   visionBlock: {
     marginVertical: 30,
     alignItems: "center",
@@ -262,18 +323,7 @@ const styles = StyleSheet.create({
     alignItems: "flex-start",
     marginBottom: 10,
   },
-  tick: {
-    color: "red",
-    marginRight: 6,
-  },
-  pointText: {
-    flex: 1,
-    fontWeight: "600",
-    color: "#111",
-    textAlign: "justify",
-    marginHorizontal: -7,
-
-  },
+ 
   gallerySection: {
     alignItems: "center",
     paddingVertical: 30,
@@ -330,13 +380,13 @@ const styles = StyleSheet.create({
   },
 
 
-  footer: { alignItems: "center", paddingVertical: 30 ,backgroundColor:'#1f2937'},
+  footer: { alignItems: "center", paddingVertical: 30, backgroundColor: '#1f2937' },
   footerLogo: {
     width: 100,
     height: 60,
     resizeMode: "contain",
     marginBottom: 10,
   },
-  footerTitle: { fontWeight: "700", color: "#fffb2c", marginTop:-15 },
+  footerTitle: { fontWeight: "700", color: "#fffb2c", marginTop: -15 },
   footerSubtitle: { fontWeight: "700", color: "#fffb2c" },
 });

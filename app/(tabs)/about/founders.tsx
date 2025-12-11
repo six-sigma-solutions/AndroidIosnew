@@ -101,7 +101,7 @@ export default function FounderMsg() {
           <View style={styles.messageSection}>
             <Image
               source={require('../../../assets/founder2.jpg')}
-              style={[styles.messageImage, { height: getResponsiveImageSize(isTablet, isPhone, 580) }]}
+              style={[styles.messageImage, { height: getResponsiveImageSize(isTablet, isPhone, 700) }]}
             />
           </View>
 

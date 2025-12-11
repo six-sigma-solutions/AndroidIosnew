@@ -14,7 +14,7 @@ import { useRouter } from "expo-router";
 
 
 export default function Family() {
-   const router = useRouter();
+  const router = useRouter();
   const { isTablet, isPhone } = useResponsive();
   const steps = [
     {
@@ -52,7 +52,17 @@ export default function Family() {
         </View>
         <Text style={styles.protectGrowProsper}>Protect. Grow. Prosper</Text>
       </View>
-     
+      <Text style={styles.subtitle}>
+        True prosperity comes from both good health and financial security.
+        With our transparent, collaborative approach, we bring your vision to life.
+        Guided by our three-phase methodology, we consistently deliver value and
+        adapt to change — building the best world:
+      </Text>
+      {/* Separate line for highlight text */}
+      <View style={{ marginTop: 8 }}>
+        <Text style={styles.highlightText}>Healthier, Happier, and Wealthier</Text>
+      </View>
+
 
       {/* Family Steps */}
       {steps.map((step) => (
@@ -62,7 +72,7 @@ export default function Family() {
             style={[
               styles.familyImageCard,
               {
-                height: getResponsiveImageSize(isTablet, isPhone, 320),
+                height: getResponsiveImageSize(isTablet, isPhone, 400),
                 width: '100%',
               },
             ]}
@@ -75,7 +85,7 @@ export default function Family() {
 
       {/* Blog Section */}
       <View style={styles.blogSection}>
-       
+
         <TouchableOpacity
           style={styles.readMoreBtn}
           onPress={() => router.push("/(tabs)/mylife/entrepreneur")}
@@ -86,15 +96,15 @@ export default function Family() {
 
       {/* Footer */}
       <View style={styles.footer}>
-              <Image
-                source={{
-                  uri: "https://res.cloudinary.com/dgay8ba3o/image/upload/v1762702091/dailymoney222_guqvud.png",
-                }}
-                style={styles.footerLogo}
-              />
-              <Text style={[styles.footerTitle, { fontSize: getResponsiveFontSize(isTablet, 20) }]}></Text>
-              <Text style={[styles.footerSubtitle, { fontSize: getResponsiveFontSize(isTablet, 16) }]}>Independent for Entire Life</Text>
-            </View>
+        <Image
+          source={{
+            uri: "https://res.cloudinary.com/dgay8ba3o/image/upload/v1762702091/dailymoney222_guqvud.png",
+          }}
+          style={styles.footerLogo}
+        />
+        <Text style={[styles.footerTitle, { fontSize: getResponsiveFontSize(isTablet, 20) }]}></Text>
+        <Text style={[styles.footerSubtitle, { fontSize: getResponsiveFontSize(isTablet, 16) }]}>Independent for Entire Life</Text>
+      </View>
     </AutoScrollView>
   );
 }
@@ -133,23 +143,26 @@ const styles = StyleSheet.create({
   },
   subtitle: {
     fontSize: 15,
-    lineHeight: 25, 
-    fontWeight: "600", 
+    lineHeight: 25,
+    fontWeight: "600",
+    marginTop: 10,
     justifyContent: "center",
     color: '#001f54',
     textAlign: 'justify',
-
+    marginLeft: 15,
   },
+
   highlightText: {
-  backgroundColor:'#047871',
-  color: '#fff',
-  paddingHorizontal:8,
- 
-  borderRadius: 6,
-  fontWeight: 'bold',
- 
-  
-  
+    backgroundColor: '#047871',
+    color: '#fff',
+    fontSize: 15,
+    fontWeight: 'bold',
+    borderRadius: 10,
+    paddingVertical: 8,
+    paddingHorizontal: 18,
+    marginBottom: 18,
+    marginLeft: 15,
+    alignSelf: 'flex-start',
   },
   highlightColumn: {
     marginTop: 8,
@@ -192,7 +205,7 @@ const styles = StyleSheet.create({
     fontStyle: 'italic',
     color: '#333',
     lineHeight: 25,
-    fontWeight: "600", 
+    fontWeight: "600",
     textAlign: 'center',
   },
 
@@ -211,7 +224,7 @@ const styles = StyleSheet.create({
     marginBottom: 12,
   },
   readMoreBtn: {
-  backgroundColor: '#0b3a55',
+    backgroundColor: '#0b3a55',
     borderRadius: 8,
     paddingHorizontal: 20,
     paddingVertical: 10,
@@ -221,14 +234,14 @@ const styles = StyleSheet.create({
     fontWeight: '600',
   },
 
- 
-  footer: { alignItems: "center", paddingVertical: 30 ,backgroundColor:'#1f2937'},
+
+  footer: { alignItems: "center", paddingVertical: 30, backgroundColor: '#1f2937' },
   footerLogo: {
     width: 100,
     height: 60,
     resizeMode: "contain",
     marginBottom: 10,
   },
-  footerTitle: { fontSize: 20, fontWeight: "700", marginTop:-15, color: "#fffb2c" },
+  footerTitle: { fontSize: 20, fontWeight: "700", marginTop: -15, color: "#fffb2c" },
   footerSubtitle: { fontSize: 16, fontWeight: "700", color: "#fffb2c" },
 });

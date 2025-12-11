@@ -41,7 +41,7 @@ const members: Member[] = [
   { name: 'Jeganraj A', image: require("../assets/jega2.png"), slogan: 'Healthy living happy living.', link: '/jegan' },
   { name: 'Dhanush A V', image: require("../assets/dhanush.jpg"), slogan: 'My Healthy weight loss journey starts Now.', link: '/dhanush' },
   { name: 'Kishore K', image: require("../assets/kisore.jpg"), slogan: 'Slim, Fit, and full of Energy.', link: '/kirhore' },
-  { name: 'Ilayaraju C', image: require("../assets/raju.jpg"), slogan: 'Small steps lead to big changes.', link: '/ilaya' },
+  { name: 'Ilayaraju C', image: require("../assets/raju.jpg"), slogan: 'Choosing health and happiness every day.', link: '/ilaya' },
 
   // Placeholder members
   { name: 'X X X X', image: { uri: 'https://placehold.co/100x100/EEE/888?text=Member' }, slogan: 'My wellness journey begins Now.', link: '/contact' },

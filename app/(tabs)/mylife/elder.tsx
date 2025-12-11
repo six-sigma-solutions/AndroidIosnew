@@ -138,7 +138,7 @@ export default function Elder() {
                     height: getResponsiveImageSize(
                       isTablet,
                       isPhone,
-                      570
+                      700
                     ),
                   },
                 ]}

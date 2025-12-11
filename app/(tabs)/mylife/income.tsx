@@ -87,7 +87,7 @@ export default function Income() {
                   ? styles.income12Image
                   : styles.image,
                 {
-                  height: getResponsiveImageSize(isTablet, isPhone, section.image === require("../../../assets/income-12.jpg") ? 400 : 600),
+                  height: getResponsiveImageSize(isTablet, isPhone, section.image === require("../../../assets/income-12.jpg") ? 600 : 750),
                   width: "95%",
                   borderRadius: 70,
                   marginBottom: 18,

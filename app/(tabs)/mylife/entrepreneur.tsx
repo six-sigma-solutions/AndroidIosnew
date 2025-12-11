@@ -248,8 +248,8 @@ const styles = StyleSheet.create({
   },
 
   entpCardImageWrapper: {
-    width: 270,
-    height: 300,
+    width: "100%",
+    height: 550,
     backgroundColor: '#047871',
     borderTopLeftRadius: 50,
     borderBottomRightRadius: 50,
