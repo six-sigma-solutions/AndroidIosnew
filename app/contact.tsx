@@ -184,7 +184,7 @@ export default function Contact() {
       </View>
 
       {/* <Text style={styles.title}>📞 Contact Us</Text> */}
-      <Text style={styles.subtitle}>Join Together! Journey Together!</Text>
+      <Text style={styles.subtitle}>Join The Journey Together!</Text>
       
       {currentField && (
         <View style={styles.currentFieldIndicator}>

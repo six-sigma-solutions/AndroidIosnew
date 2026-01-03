@@ -191,7 +191,7 @@ export default function Contact() {
             <View style={styles.topSection}>
                 <View style={styles.contactText}>
                     {/* <Text style={styles.title}>📞 Contact Us</Text> */}
-                    <Text style={styles.subtitle}>Join Together! Journey Together!</Text>
+                    <Text style={styles.subtitle}>Join The Journey Together!</Text>
 
                 </View>
 

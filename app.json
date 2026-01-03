@@ -70,13 +70,14 @@
           "supportsBackgroundPlayback": true,
           "supportsPictureInPicture": true
         }
-      ]
+      ],
+      "expo-asset"
     ],
     "sdkVersion": "54.0.0",
     "extra": {
       "router": {},
       "eas": {
-        "projectId": "aaa8dd5f-ecb0-4c1f-91be-4fd42255da55"
+        "projectId": "4394054c-0d5a-42c0-a2c4-7de37ea84848"
       }
     }
   }
