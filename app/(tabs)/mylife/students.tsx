@@ -148,7 +148,7 @@ export default function Students() {
                     height: getResponsiveImageSize(
                       isTablet,
                       isPhone,
-                      index === 1 ? 670 : 700
+                      index === 1 ? 420 : 540
                     ),
                   },
                   index === 1 && styles.imageShort,
@@ -277,12 +277,17 @@ const styles = StyleSheet.create({
 
   image: {
     width: "100%",
-    height: 490,
-    borderTopLeftRadius: 100,
-    borderBottomRightRadius: 93,
+    height: 440,
+    
+    borderTopLeftRadius: 80,
+    borderBottomRightRadius: 80,
+    borderTopRightRadius: 0,
+    borderBottomLeftRadius: 0,
+    
   },
   imageShort: {
-    height: 480,
+    height: 420,
+    
   },
 
   text: {

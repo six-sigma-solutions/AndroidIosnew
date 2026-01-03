@@ -38,7 +38,7 @@ export default function Solution() {
               index === 0
                 ? [styles.cardImage, styles.cardImageSolution1, { height: getResponsiveImageSize(isTablet, isPhone, 400) }]
                 : index === 3
-                ? [styles.cardImageModified, { height: getResponsiveImageSize(isTablet, isPhone, 550) }]
+                ? [styles.cardImageModified, { height: getResponsiveImageSize(isTablet, isPhone, 390) }]
                 : [styles.cardImage, { height: getResponsiveImageSize(isTablet, isPhone, 550) }]
             }
             resizeMode='stretch'
@@ -72,7 +72,7 @@ const styles = StyleSheet.create({
   },
   cardImageModified: {
     width: '98%',
-    height: 550,
+    height: 300,
     borderRadius: 20,
     alignSelf: 'center',
   },

@@ -135,11 +135,7 @@ export default function Elder() {
                 style={[
                   styles.image,
                   {
-                    height: getResponsiveImageSize(
-                      isTablet,
-                      isPhone,
-                      700
-                    ),
+                    height: getResponsiveImageSize(isTablet, isPhone, 500),
                   },
                 ]}
                 resizeMode="stretch"
@@ -263,9 +259,12 @@ const styles = StyleSheet.create({
 
   image: {
     width: "100%",
-    height: 500,
-    borderTopLeftRadius: 100,
-    borderBottomRightRadius: 93,
+    height: 420,
+    borderTopLeftRadius: 70,
+    borderBottomRightRadius: 80,
+    borderTopRightRadius: 0,
+    borderBottomLeftRadius: 0,
+    resizeMode: 'cover',
   },
 
   viewMoreWrap: { alignItems: "center", marginVertical: 30 },

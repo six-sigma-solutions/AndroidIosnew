@@ -87,10 +87,10 @@ export default function Income() {
                   ? styles.income12Image
                   : styles.image,
                 {
-                  height: getResponsiveImageSize(isTablet, isPhone, section.image === require("../../../assets/income-12.jpg") ? 600 : 750),
-                  width: "95%",
-                  borderRadius: 70,
-                  marginBottom: 18,
+                  height: getResponsiveImageSize(isTablet, isPhone, section.image === require("../../../assets/income-12.jpg") ? 400 : 590),
+                  width: "100%",
+                  borderRadius: 40,
+                  marginBottom: 12,
                   marginTop: 0,
                   alignSelf: 'center',
                   resizeMode: 'cover',
@@ -204,8 +204,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   image: {
-    width: 32,
-    height: 10,
+    width: "100%",
+    height: 480,
     overflow: "hidden",
     marginBottom: 15,
     borderTopLeftRadius: 120,

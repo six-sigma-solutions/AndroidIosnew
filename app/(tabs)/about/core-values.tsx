@@ -154,7 +154,7 @@ const Visionmission: React.FC = () => {
       {sections.map((section, index) => (
         <View key={index} style={styles.visionBlock}>
           {/* Image on Top */}
-          <Image source={section.img} style={[styles.sectionImage, { height: getResponsiveImageSize(isTablet, isPhone, 220) }]} />
+          <Image source={section.img} style={[styles.sectionImage, { height: getResponsiveImageSize(isTablet, isPhone, 180) }]} resizeMode="cover" />
 
           {/* Text Below */}
           <View style={styles.visionText}>
@@ -193,7 +193,9 @@ const Visionmission: React.FC = () => {
         >
           {galleryImages.map((img, idx) => (
             <View key={idx} style={styles.galleryItem}>
-              <Image source={img} style={[styles.galleryImage, { height: getResponsiveImageSize(isTablet, isPhone, 480), width: getResponsiveImageSize(isTablet, isPhone, 320) }]} resizeMode="cover" />
+              <View style={[styles.galleryImageWrapper, { height: getResponsiveImageSize(isTablet, isPhone, 480), width: getResponsiveImageSize(isTablet, isPhone, 320) }]}>
+                <Image source={img} style={styles.galleryImage} resizeMode="cover" />
+              </View>
               <Animated.Text
                 style={[
                   styles.arrow,
@@ -259,9 +261,12 @@ const styles = StyleSheet.create({
     shadowColor: "#000",
     shadowOpacity: 0.3,
     shadowRadius: 10,
+    
   },
   heroImage: {
     width: "100%",
+    
+   
     
   },
   heroOverlay: {
@@ -312,8 +317,13 @@ pointText: {
   },
   sectionImage: {
     width: "100%",
+    
     borderRadius: 16,
     marginBottom: 15,
+    // height removed: use responsive inline height with getResponsiveImageSize
+    resizeMode: "contain",
+    marginLeft: 20,
+    marginRight: 20,
   },
   visionText: {
     width: "98%",
@@ -327,12 +337,19 @@ pointText: {
   gallerySection: {
     alignItems: "center",
     paddingVertical: 30,
+
   },
 
   galleryItem: {
     alignItems: "center",
     justifyContent: "center",
     marginRight: 20,
+  },
+
+  galleryImageWrapper: {
+    borderRadius: 16,
+    overflow: "hidden",
+    backgroundColor: "#eee",
   },
 
   arrow: {
@@ -355,11 +372,9 @@ pointText: {
     paddingHorizontal: 10,
   },
   galleryImage: {
-    borderRadius: 16,
-    padding: 20,
-    paddingLeft: 20,
-    paddingRight: 20,
-    marginRight: 12,
+    width: "100%",
+    height: "100%",
+    // image will be clipped by wrapper's borderRadius
   },
   buttonSection: {
     alignItems: "center",

@@ -48,26 +48,26 @@ export default function FounderMsg() {
                 Media, Finance, and Wellness.
               </Text>
 
-              <Text style={[styles.lifeJourneyParagraph, { fontSize: getResponsiveFontSize(isTablet, 17), lineHeight: getResponsiveFontSize(isTablet, 22) }] }>
+              <Text style={[styles.lifeJourneyParagraph, { fontSize: getResponsiveFontSize(isTablet, 16), lineHeight: getResponsiveFontSize(isTablet, 24) }] }>
                 From launching Kailash Cable Network in 1990 to serving as Deputy
                 Director — Distribution at Tamilthirai TV and AVP at India Infoline
                 Ltd., I have developed deep expertise in leadership, business growth
                 and people development.
               </Text>
 
-              <Text style={[styles.lifeJourneyParagraph, { fontSize: getResponsiveFontSize(isTablet, 17), lineHeight: getResponsiveFontSize(isTablet, 22) }] }>
+              <Text style={[styles.lifeJourneyParagraph, { fontSize: getResponsiveFontSize(isTablet, 16), lineHeight: getResponsiveFontSize(isTablet, 24) }] }>
                 In 2010, I faced the worst health challenge of my life. There was a
                 time I feared losing everything — my family, my wife and my children.
                 They too were thrown into a difficult and uncertain phase.
               </Text>
 
-              <Text style={[styles.lifeJourneyParagraph, { fontSize: getResponsiveFontSize(isTablet, 17), lineHeight: getResponsiveFontSize(isTablet, 22) }] }>
+              <Text style={[styles.lifeJourneyParagraph, { fontSize: getResponsiveFontSize(isTablet, 16), lineHeight: getResponsiveFontSize(isTablet, 24) }] }>
                 At that moment, I made a decision — to fight back, to rise and to
                 reclaim my life. Through determination, discipline and faith, I
                 overcame those struggles and rebuilt myself from within.
               </Text>
 
-              <Text style={[styles.lifeJourneyParagraph, { fontSize: getResponsiveFontSize(isTablet, 17), lineHeight: getResponsiveFontSize(isTablet, 22) }] }>
+              <Text style={[styles.lifeJourneyParagraph, { fontSize: getResponsiveFontSize(isTablet, 16), lineHeight: getResponsiveFontSize(isTablet, 24) }] }>
                 Since then, I've dedicated my life to wellness — helping over 100,000 (One Lakh)
                 people transform their health and wealth, around the world while
                 building an organization of 5,000+ associates. My journey has taken me
@@ -75,7 +75,7 @@ export default function FounderMsg() {
                 holistic well-being.
               </Text>
               
-              <Text style={[styles.lifeJourneynew, { fontSize: getResponsiveFontSize(isTablet, 17), lineHeight: getResponsiveFontSize(isTablet, 23) }] }>
+              <Text style={[styles.lifeJourneynew, { fontSize: getResponsiveFontSize(isTablet, 16), lineHeight: getResponsiveFontSize(isTablet, 24) }] }>
                 Today, I am settled in life. My two children are
                 well-settled too. Together, we live a healthy, wealthy,
                 happy and heavenly life. And to crown it all, I have
@@ -83,12 +83,12 @@ export default function FounderMsg() {
                 This moment is a reminder that when passion meets
                 persistence, success becomes inevitable.
                 </Text>
-                <Text style={[styles.lifeJourneyParagraph, { fontSize: getResponsiveFontSize(isTablet, 17), lineHeight: getResponsiveFontSize(isTablet, 22) }] }>
+                <Text style={[styles.lifeJourneyParagraph, { fontSize: getResponsiveFontSize(isTablet, 16), lineHeight: getResponsiveFontSize(isTablet, 24) }] }>
                I continue to live each day with gratitude, strength, and
                purpose — empowering others to achieve a balanced life
                of health, happiness, and financial freedom.</Text>
 
-              <Text style={[styles.lifeJourneyCloser, { fontSize: getResponsiveFontSize(isTablet, 16), lineHeight: getResponsiveFontSize(isTablet, 26) }] }>
+              <Text style={[styles.lifeJourneyCloser, { fontSize: getResponsiveFontSize(isTablet, 16), lineHeight: getResponsiveFontSize(isTablet, 24) }] }>
                 And through all of this, I've been fulfilling my childhood ambition {'\n'}
                 "I want to live after my death". By creating lasting impact, touching
                 lives, and inspiring others to live fully — my journey continues
@@ -101,7 +101,7 @@ export default function FounderMsg() {
           <View style={styles.messageSection}>
             <Image
               source={require('../../../assets/founder2.jpg')}
-              style={[styles.messageImage, { height: getResponsiveImageSize(isTablet, isPhone, 700) }]}
+              style={[styles.messageImage, { height: getResponsiveImageSize(isTablet, isPhone, 560) }]}
             />
           </View>
 
@@ -210,13 +210,11 @@ const styles = StyleSheet.create({
     width: "100%",
   },
   messageQuote: {
-    fontSize: 16,
-    lineHeight: 26,
     color: '#fff',
     marginBottom: 32,
     paddingLeft: 10,
     fontStyle: 'italic',
-    textAlign: 'center',
+    textAlign: 'justify',
     justifyContent: "flex-end",
   },
   signature: {

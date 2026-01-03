@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { Asset } from 'expo-asset';
 import { Text, View } from 'react-native';
 // Class-based error boundary for React Native
 class ErrorBoundary extends React.Component<{ children: React.ReactNode }, { error: Error | null }> {
@@ -47,6 +48,18 @@ function AuthGate() {
 
 
 export default function RootLayout() {
+  useEffect(() => {
+    // Preload video asset so HomeScreen can mount it instantly
+    try {
+      const video = require("./assets/budhha-video6.mp4");
+      Asset.fromModule(video).downloadAsync().catch((e) => {
+        console.warn('[RootLayout] video preload failed', e);
+      });
+    } catch (e) {
+      console.warn('[RootLayout] video asset not found for preload', e);
+    }
+  }, []);
+
   return (
     <ErrorBoundary>
       <AuthGate />

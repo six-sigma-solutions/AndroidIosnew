@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useImperativeHandle } from 'react';
 import { ScrollView, ScrollViewProps, Keyboard, TextInput, findNodeHandle, Platform } from 'react-native';
 import { useFocusEffect } from '@react-navigation/native';
 
@@ -64,6 +64,12 @@ const AutoScrollView = React.forwardRef<any, ScrollViewProps>((props, forwardedR
     else (forwardedRef as any).current = node;
   };
 
+  // Expose a simple imperative API for parents (scrollToTop)
+  useImperativeHandle(forwardedRef, () => ({
+    scrollToTop: () => localRef.current?.scrollTo({ y: 0, animated: true }),
+    scrollTo: (args: any) => localRef.current?.scrollTo(args),
+  }));
+
   // Ensure ScrollView itself fills available space and uses the same background color
   // as the content to avoid white gaps above the keyboard on some devices.
   const incomingStyle = (props as any).style || {};
@@ -76,6 +82,12 @@ const AutoScrollView = React.forwardRef<any, ScrollViewProps>((props, forwardedR
     <ScrollView
       ref={setRef as any}
       keyboardShouldPersistTaps="handled"
+      // PERFORMANCE TWEAKS: reduce bridge traffic and unload off-screen content
+      scrollEventThrottle={32}
+      removeClippedSubviews={true}
+      // android-only optimization name for RN's VirtualizedList windowing
+      // windowSize is supported on ScrollView as well
+      windowSize={5}
       style={[{ flex: 1, backgroundColor: bg }, incomingStyle]}
       contentContainerStyle={[{ flexGrow: 1, minHeight: '100%' }, incomingContentStyle]}
       {...props}

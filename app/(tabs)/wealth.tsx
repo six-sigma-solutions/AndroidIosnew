@@ -147,7 +147,7 @@ const styles = StyleSheet.create({
 
   image: {
     width: "95%",
-    height: 600,
+    height: 500,
     resizeMode: "cover",
     alignSelf: "center",
     marginTop: 12,
@@ -174,7 +174,7 @@ const styles = StyleSheet.create({
   },
   heroImage: {
     width: "90%",
-    height: 300,
+    height: 280,
     resizeMode: "cover",
     alignSelf: "center",
     marginTop: 10,
@@ -200,7 +200,7 @@ const styles = StyleSheet.create({
   },
   lastImage: {
     width: "95%",
-    height: 550,
+    height: 500,
     alignSelf: "center",
     marginTop: 12,
     marginBottom: 8,

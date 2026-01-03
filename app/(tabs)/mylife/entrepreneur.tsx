@@ -11,7 +11,7 @@ import {
 } from "react-native";
 
 import AutoScrollView from "../../../components/AutoScrollView";
-import { useResponsive } from "../../../hooks/use-responsive";
+import { useResponsive, getResponsiveImageSize } from "../../../hooks/use-responsive";
 
 
 const Entrepreneur = () => {
@@ -26,7 +26,7 @@ const Entrepreneur = () => {
         </View>
         <Image
           source={require("../../../assets/headhead.jpg")}
-          style={[styles.heroImage, { height: 220 }]}
+          style={[styles.heroImage, { height: getResponsiveImageSize(isTablet, isPhone, 220) }]}
         />
       </View>
 
@@ -120,10 +120,16 @@ const Entrepreneur = () => {
         },
       ].map((row, index) => (
         <View key={index} style={[styles.row, { backgroundColor: row.bgColor }]}>
-          <View style={styles.entpCardImageWrapper}>
+          <View
+            style={
+              index === 0
+                ? [styles.entpSpecialWrapper, { height: getResponsiveImageSize(isTablet, isPhone, 420) }]
+                : [styles.entpCardImageWrapper, { height: getResponsiveImageSize(isTablet, isPhone, 490) }]
+            }
+          >
             <Image
               source={row.image}
-              style={styles.entpCardImage}
+              style={index === 0 ? styles.entpSpecialImage : styles.entpCardImage}
             />
           </View>
           <View style={styles.textBox}>
@@ -261,11 +267,39 @@ const styles = StyleSheet.create({
     marginTop: 10,
     justifyContent: 'center',
     alignItems: 'center',
+    resizeMode:'contain'
   },
   entpCardImage: {
     width: '100%',
     height: '100%',
     resizeMode: 'cover',
+  },
+  /* Special style for the highlighted entrepreneur image only */
+  entpSpecialWrapper: {
+    width: "100%",
+    backgroundColor: '#047871',
+    borderTopLeftRadius: 50,
+    borderBottomRightRadius: 50,
+    borderTopRightRadius: 0,
+    borderBottomLeftRadius: 0,
+    overflow: 'hidden',
+    alignSelf: 'center',
+    resizeMode: 'cover',
+    marginBottom: 12,
+    marginTop: 10,
+    justifyContent: 'center',
+    alignItems: 'center',
+    elevation: 6,
+    shadowColor: '#000',
+    shadowOpacity: 0.12,
+    shadowRadius: 12,
+    shadowOffset: { width: 0, height: 4 },
+  },
+  entpSpecialImage: {
+    width: '100%',
+    height: '100%',
+    resizeMode: 'cover',
+    backgroundColor: '#fff',
   },
   btnPrimary: {
     backgroundColor: "#0b3a55",

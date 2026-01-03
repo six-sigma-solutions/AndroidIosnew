@@ -15,6 +15,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { Asset } from "expo-asset";
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { useRouter, useFocusEffect } from "expo-router";
+import { InteractionManager } from 'react-native';
 import { FontAwesome6 } from "@expo/vector-icons";
 import MaskedView from "@react-native-masked-view/masked-view";
 import PopupModal from "../../components/PopupModal";
@@ -51,6 +52,7 @@ function HomeScreen() {
   const scrollRef = React.useRef(null); // Ref for AutoScrollView
   // Mask is always ON - no toggle needed
   const [videoLoaded, setVideoLoaded] = useState(false);
+  const [videoOpacity, setVideoOpacity] = useState(0);
   const [shouldPlayVideos, setShouldPlayVideos] = useState(true);
   const [isFocused, setIsFocused] = useState(true);
   const [videoKey, setVideoKey] = useState(0);
@@ -80,24 +82,37 @@ function HomeScreen() {
   // Robust video focus handler for Android reliability
   useFocusEffect(
     React.useCallback(() => {
-      // Scroll to top
-      if (scrollRef.current && typeof scrollRef.current.scrollTo === 'function') {
-        scrollRef.current.scrollTo({ y: 0, animated: false });
-      }
-      // Reset videoLoaded to false to force instant remount and show
-      setVideoLoaded(false);
-      setVideoKey(prev => prev + 1);
-      setIsFocused(true);
-      setShouldPlayVideos(true);
-      // Play video after remount
-      setTimeout(() => {
-        setVideoLoaded(true);
-        if (mainVideoRef.current) {
-          mainVideoRef.current.playAsync().catch(() => {});
-        }
-      }, 50);
-      // Cleanup
+      // Use InteractionManager to wait until navigation animations finish
+      const task = InteractionManager.runAfterInteractions(() => {
+        try {
+          if (scrollRef.current && typeof scrollRef.current.scrollTo === 'function') {
+            // use imperative API exposed by AutoScrollView
+            (scrollRef.current as any).scrollToTop?.();
+          }
+        } catch (e) {}
+
+        // Force a remount of the Video native view to avoid stale native frames
+        setVideoLoaded(false);
+        setVideoOpacity(0);
+        setVideoKey(prev => prev + 1);
+        setIsFocused(true);
+        setShouldPlayVideos(true);
+
+        // Play video after a short delay to allow the native view to initialize
+        const t = setTimeout(async () => {
+          setVideoLoaded(true);
+          setVideoOpacity(1);
+          if (mainVideoRef.current) {
+            try { await mainVideoRef.current.playAsync(); } catch(e){}
+          }
+        }, 150);
+
+        // return cleanup for the inner timer
+        return () => clearTimeout(t);
+      });
+
       return () => {
+        task.cancel && task.cancel();
         setIsFocused(false);
         setShouldPlayVideos(false);
         setVideoLoaded(false);
@@ -158,20 +173,28 @@ function HomeScreen() {
             key={`video-${videoKey}`}
             ref={mainVideoRef}
             source={require("../../assets/budhha-video6.mp4")}
-            style={[styles.buddhaImage, { width: '100%', height: getResponsiveImageSize(isTablet, isPhone, 500) }]}
+            style={[styles.buddhaImage, { width: '100%', height: getResponsiveImageSize(isTablet, isPhone, 500), opacity: videoOpacity }]}
             resizeMode={ResizeMode.COVER}
             shouldPlay={isFocused}
             isLooping
             isMuted
             useNativeControls={false}
+           // staysActiveInBackground={false}
+            shouldRasterizeIOS={true}
+            renderToHardwareTextureAndroid={true}
+            usePoster={true}
+            posterSource={require("../../assets/bg-mask.png")}
+            posterStyle={{ resizeMode: ResizeMode.COVER }}
             onLoad={() => {
               setVideoLoaded(true);
+              setVideoOpacity(1);
               if (isFocused && mainVideoRef.current) {
                 mainVideoRef.current.playAsync().catch(() => {});
               }
             }}
             onError={() => {
               setVideoLoaded(true);
+              setVideoOpacity(1);
             }}
           />
         </MaskedView>
@@ -324,18 +347,18 @@ function HomeScreen() {
         <View style={styles.teamGrid}>
           <View style={styles.teamMemberCard}>
             <Image
-              source={{ uri: "https://res.cloudinary.com/dgay8ba3o/image/upload/v1762151586/person-1_fy6xyi.jpg" }}
+              source={{ uri: "https://res.cloudinary.com/dgay8ba3o/image/upload/v1767422776/person23_dtcji8.jpg" }}
               style={[styles.teamMemberImage, { width: getResponsiveImageSize(isTablet, isPhone, 160), height: getResponsiveImageSize(isTablet, isPhone, 160) }]}
             />
-            <Text style={styles.teamMemberName}>S.Vasu</Text>
+            <Text style={styles.teamMemberName}>R.K. Selvamani</Text>
             
           </View>
           <View style={styles.teamMemberCard}>
             <Image
-              source={{ uri: "https://via.placeholder.com/120" }}
+              source={{ uri: "https://res.cloudinary.com/dgay8ba3o/image/upload/v1762151586/person-1_fy6xyi.jpg" }}
               style={[styles.teamMemberImage, { width: getResponsiveImageSize(isTablet, isPhone, 160), height: getResponsiveImageSize(isTablet, isPhone, 160) }]}
             />
-            <Text style={styles.teamMemberName}>xxxxx</Text>
+            <Text style={styles.teamMemberName}>S.Vasu</Text>
           
           </View>
           <View style={styles.teamMemberCard}>
@@ -378,7 +401,7 @@ function HomeScreen() {
               Engineering College,{"\n"}Salem - 636011.{"\n"}*/}Chennai, TN, India.
             </Text>
             <Text style={styles.footerCopyright}>
-              © 2025. All rights reserved.
+              © 2025. All rights  reserved.
             </Text>
           </View>
            

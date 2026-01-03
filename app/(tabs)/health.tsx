@@ -111,7 +111,7 @@ export default function Health() {
               source={item.img}
               style={[
                 styles.cardImage,
-                { height: getResponsiveImageSize(isTablet, isPhone, 700), width: '100%' }
+                { height: getResponsiveImageSize(isTablet, isPhone, 600), width: '100%' }
               ]}
             />
             <View style={[styles.cardBox, { backgroundColor: item.color }]}>
@@ -149,13 +149,14 @@ export default function Health() {
           <Text style={styles.footerQuoteTamilsecond3}>
             {"முன் உண்டது செரித்ததைத் தெளிவாக அறிந்து, அதன் பின்னரே உண்பானால், அவனுடைய உடலுக்கு ‘மருந்து’ வேண்டாம்.".replace(/["']/g, "")}
           </Text>
+<Text style={styles.footerQuoteTamilsecond4}>
+  {"\"தண்ணீரைச் சாப்பிடு, உணவை அருந்து\"\n உண்மையான ஆரோக்கிய வாழ்க்கையின்\n ரகசியம்."}
+</Text>
 
-          <Text style={styles.footerQuoteTamilsecond4}>
-            {'"தண்ணீரைச் சாப்பிடு, உணவை அருந்து" உண்மையான ஆரோக்கிய வாழ்க்கையின் ரகசியம்.'}
-          </Text>
+
 
           <Text style={styles.footerQuotenew}>
-            💧"Eat water, Sip food" The secret of true healthy life.
+             💧"Eat water, Sip food" The secret of true {"\n"}      healthy life.
           </Text>
         </View>
       </View>
@@ -247,15 +248,15 @@ const styles = StyleSheet.create({
   cardImage: {
     width: "100%",
     height: 500,
-    marginBottom: 15,
+    marginBottom: 12,
     resizeMode: "cover" as const,
-    borderTopLeftRadius: 140,
-    borderBottomRightRadius: 140,
+    borderTopLeftRadius: 120,
+    borderBottomRightRadius: 120,
     overflow: "hidden",
     backgroundColor: "#fff",
     shadowColor: "#000",
     shadowOpacity: 0.10,
-    shadowRadius: 10,
+    shadowRadius: 8,
     shadowOffset: { width: 0, height: 4 },
   },
   cardBox: { borderRadius: 12, padding: 20, justifyContent: "center", alignItems: "center", elevation: 4 },
@@ -264,7 +265,7 @@ const styles = StyleSheet.create({
   footer: { backgroundColor: "#817676", borderRadius: 16, paddingVertical: 25, paddingHorizontal: 15, alignItems: "flex-start" },
   footerQuoteEnglish: { color: "#ffe600", fontWeight: "700", fontSize: 12, marginBottom: 10, textAlign: "left", marginLeft: 4 },
   footerQuotenew: { color: "#ffe600", fontWeight: "600", fontSize: 12, marginBottom: 10, textAlign: "left", marginLeft: -6 },
-  footerQuoteTamil: { color: "#1aff7a", fontWeight: "700", fontSize: 10, textAlign: "left" },
+  footerQuoteTamil: { color: "#1aff7a", fontWeight: "600", fontSize: 9, textAlign: "left" },
   rightAlignContainer: { width: "90%", alignItems: "flex-end" },
   footerQuoteTamilsecondtitle: { color: "#1aff7a", fontWeight: "600", fontSize: 10, textAlign: "center", marginVertical: 5 },
   footerQuoteTamilsecond3: { color: "#fff", fontWeight: "600", fontSize: 10, textAlign: "left", paddingHorizontal: 10, marginVertical: 5, marginLeft: -6 },

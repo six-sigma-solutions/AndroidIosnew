@@ -190,7 +190,7 @@ export default function Contact() {
       {/* --- TOP SECTION: Text Left & Image Right --- */}
       <View style={styles.topSection}>
         <View style={styles.contactText}>
-        <Text style={styles.title}>📞 Contact Us</Text>
+        {/* <Text style={styles.title}>📞 Contact Us</Text> */}
         <Text style={styles.subtitle}>Join Together! Journey Together!</Text>
         
         </View>
@@ -216,8 +216,7 @@ export default function Contact() {
           </Text>
         </View>
       )}
-
-           {/* --- Office Info --- */}
+ {/* --- Office Info --- */}
            <View style={styles.officeInfo}>
              <Text style={styles.heading1}> SIX SIGMA SOLUTION</Text>
              <Text style={styles.heading}>🏢 Our Offices</Text>
@@ -226,31 +225,33 @@ export default function Contact() {
                  {/* No 13, Breeze Enclave, Noombal Main Road, <br /> */}
                  Chennai, TN-600077. 
              </Text>
-              <Text style={styles.text}>
+              <Text style={[styles.text, { color: '#008000' }]}> 
             Launching soon !!!
-     
-          
-               
              </Text>
-           <View >
-           <Image
-             source={require('../assets/phonestand.png')}
-             style={styles.phonestandImage}
-           />
-         </View>
+              <View style={{ flexDirection: 'row', alignItems: 'flex-start', marginTop: 7 }}>
+                <View style={{ flex: 1, paddingRight: 12 }}>
+                  <Text style={styles.placeText}>Singapore</Text>
+                  <Text style={styles.placeText}>Malaysia</Text>
+                  <Text style={styles.placeText}>Australia</Text>
+                  <Text style={styles.placeText}>Dubai</Text>
+                  <Text style={styles.placeText}>London</Text>
+                  <Text style={styles.placeText}>France</Text>
+                  <Text style={styles.placeText}>Canada</Text>
+                  <Text style={styles.placeText}>USA</Text>
+                  <Text style={[styles.text, { marginTop: 16 }]}>Get in touch.</Text>
+                </View>
+                <View style={{ width: 140, alignItems: 'center' }}>
+                  <Image
+                    source={require('../assets/phonestand.png')}
+                    style={styles.phonestandImage}
+                    resizeMode="contain"
+                  />
+                </View>
+              </View>
             
-       
-     
-     
-             <Text style={styles.text}>
-             Singapore, Malayasia, Australia, Dubai, London, France, Canada & USA.
-             </Text>
-             
-             <Text style={styles.text}>
-             Get in touch.
-             </Text>
+        
 
-        <Text style={[styles.heading, { marginTop: 20 }]}>✉️ Email us</Text>
+        <Text style={[styles.heading, { marginTop: 6 }]}>✉️ Email us</Text>
         <Text style={styles.link} onPress={() => Linking.openURL("mailto:support@dmhealthy.com")}>
           support@dmhealthy.com
         </Text>
@@ -288,11 +289,11 @@ export default function Contact() {
       <View style={styles.form}>
         <Text style={styles.heading}>💬 For Inquiries</Text>
         <Text style={styles.instructionText}>
-          📝 Fill in your details below and we'll get back to you within 24 hours!
+          📝 Fill your details below and we'll get back to you within 24 hours!
         </Text>
 
         <TextInput
-          placeholder="Enter your full name (e.g., John Smith)"
+          placeholder="Enter your full name"
           style={styles.input}
           value={form.name}
           onChangeText={(text) => handleChange("name", text)}
@@ -301,7 +302,7 @@ export default function Contact() {
         />
 
         <TextInput
-          placeholder="Enter your email (e.g., john@example.com)"
+          placeholder="Enter your email "
           style={styles.input}
           value={form.email}
           onChangeText={(text) => handleChange("email", text)}
@@ -324,7 +325,7 @@ export default function Contact() {
           </View>
 
           <TextInput
-            placeholder="Enter phone number (e.g., 9876543210)"
+            placeholder="phone number"
             style={[styles.input, { flex: 1, marginLeft: 10 }]}
             keyboardType="phone-pad"
             value={form.phone}
@@ -344,7 +345,7 @@ export default function Contact() {
         />
 
         <TextInput
-          placeholder="Type your message here... What would you like to know about our services?"
+          placeholder="Type your message here... What would you like to know more about our services?"
           style={[styles.input, { height: 120, textAlignVertical: "top" }]}
           multiline
           value={form.message}
@@ -373,6 +374,7 @@ export default function Contact() {
           </Text>
         )}
       </View>
+
       
               {/* Footer (unchanged content) */}
                   <View style={styles.footer}>
@@ -385,6 +387,8 @@ export default function Contact() {
                     <Text style={styles.footerTitle}></Text>
                     <Text style={styles.footerSubtitle}>Independent for Entire Life</Text>
                   </View>
+                    {/* White spacer below footer */}
+                    <View style={styles.footerBottomSpacer} />
       
     </KeyboardAwareScrollView>
   );
@@ -419,7 +423,7 @@ const styles = StyleSheet.create({
     paddingRight: 15,
   },
   contactSmallTitle: {
-    fontSize: 18,
+    fontSize: 16,
     color: "#0a66c2",
     fontWeight: "700",
     marginBottom: 5,
@@ -441,7 +445,7 @@ const styles = StyleSheet.create({
     marginBottom: 8,
   },
   sloganText: {
-    fontSize: 20,
+    fontSize: 16.1,
     fontWeight: "600",
     color: "#002080",
     textAlign: "center",
@@ -468,11 +472,12 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   title: {
-    fontSize: 25,
+    fontSize: 21,
     fontWeight: "700",
     textAlign: "center",
     marginVertical: 10,
     color: "#0a66c2",
+    flexShrink: 1,
   },
   subtitle: {
     fontSize: 20,
@@ -480,6 +485,7 @@ const styles = StyleSheet.create({
     marginBottom: 25,
     color: "#666",
     lineHeight: 22,
+    marginVertical:13,
   },
   currentFieldIndicator: {
     backgroundColor: "#e3f2fd",
@@ -505,8 +511,7 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 2 },
     shadowRadius: 5,
     elevation: 3,
-  },
-  heading: {
+  },heading: {
     fontSize: 18,
     fontWeight: "700",
     marginBottom: 8,
@@ -535,11 +540,17 @@ const styles = StyleSheet.create({
 
 
   phonestandImage: {
-    width: 200,
-    height: 200,
-    marginTop: 20,
-    marginBottom: 20,
-    resizeMode: 'contain', // ensures image scales correctly
+    width: 140,
+    height: 180,
+    marginTop: 8,
+    marginBottom: 8,
+    alignSelf: 'center',
+  },
+  placeText: {
+    fontSize: 16,
+    color: '#222',
+    fontWeight: '700',
+    marginBottom: 8,
   },
   text: {
     fontSize: 15,
@@ -623,7 +634,6 @@ const styles = StyleSheet.create({
     marginTop: 15,
     fontSize: 15,
   },
-
      footer: { alignItems: "center", paddingVertical: 30, backgroundColor: "#1f2937" },
   footerLogo: {
     width: 100,
@@ -631,8 +641,13 @@ const styles = StyleSheet.create({
     resizeMode: "contain",
     marginBottom: 10,
   },
-  footerTitle: { fontSize: 20, fontWeight: "700", color: "#fffb2c", marginTop: -15 },
+  footerTitle: { fontSize: 20, fontWeight: "700", color: "#fffb2c", marginTop: -28 },
   footerSubtitle: { fontSize: 16, fontWeight: "700", color: "#fffb2c" },
+  footerBottomSpacer: {
+    height: 48,
+    backgroundColor: '#ffffff',
+    marginTop: 8,
+  },
 
   tick: {
     color: '#fff',

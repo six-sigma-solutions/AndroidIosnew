@@ -76,6 +76,7 @@ export default function Family() {
                 width: '100%',
               },
             ]}
+            resizeMode="cover"
           />
           <View style={styles.textContainer}>
             <Text style={[styles.quote, { fontSize: getResponsiveFontSize(isTablet, 18) }]}>{step.quote.replace(/["']/g, "")}</Text>
@@ -179,21 +180,21 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
   },
   familyImageCard: {
-    backgroundColor: '#fff',
+    backgroundColor: 'transparent',
     borderTopLeftRadius: 100,
     borderTopRightRadius: 0,
     borderBottomLeftRadius: 0,
     borderBottomRightRadius: 80,
     marginBottom: 18,
-    resizeMode: 'cover',
+    // image resizeMode is set on the Image component (use 'contain' for full fit)
     alignSelf: 'center',
     shadowColor: '#000',
     shadowOpacity: 0.10,
     shadowRadius: 10,
     shadowOffset: { width: 0, height: 4 },
     elevation: 5,
-    borderWidth: 2,
-    borderColor: '#e0e0e0',
+    borderWidth: 0,
+    borderColor: 'transparent',
     overflow: 'hidden',
   },
   textContainer: {

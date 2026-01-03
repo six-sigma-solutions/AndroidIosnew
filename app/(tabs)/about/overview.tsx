@@ -29,7 +29,7 @@ export default function Overview() {
     },
     {
       title: "Our Approach",
-      color: "#0035c7ff",
+      color: "#ead239ff",
       text: "Clarity – Simplifying finance, so everyone feels confident.\nDiscipline – Encouraging consistent daily habits that build lasting wealth.\nIntegration – Connecting health, wealth and peace as part of the same journey.\nGenerational Growth – Ensuring prosperity passes forward, sustaining families across generations.",
       img: require("../../../assets/over2.jpg"),
     },
@@ -73,7 +73,7 @@ export default function Overview() {
           ]}
         >
           <Text style={[styles.title, { color: section.color, fontSize: getResponsiveFontSize(isTablet, 20) }]}>{section.title}</Text>
-          <Text style={[styles.text, { fontSize: getResponsiveFontSize(isTablet, 17), lineHeight: getResponsiveFontSize(isTablet, 25) }]}>{section.text}</Text>
+          <Text style={[styles.text, { fontSize: getResponsiveFontSize(isTablet, 12), lineHeight: getResponsiveFontSize(isTablet, 25) }]}>{section.text}</Text>
           <Image
             source={section.img}
             style={[
@@ -131,7 +131,7 @@ const styles = StyleSheet.create({
   },
 
   title: { fontSize: 20, fontWeight: "700", marginBottom: 10, textAlign: "center" },
-  text: { fontSize: 17, lineHeight: 25, textAlign: "justify", color: "#fff", marginBottom: 15, fontWeight: "600" },
+  text: {  lineHeight: 95 , textAlign: "justify", color: "#fff", marginBottom: 15, fontWeight: "600" },
 
   image: {
     width: '100%',
